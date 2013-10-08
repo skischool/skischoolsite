@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using SkiSchool.Web.App_Start;
 using SkiSchool.Web.Helpers;
 using SkiSchool.Web.Models;
 
@@ -11,11 +12,11 @@ namespace SkiSchool.Web.Controllers.Api
 {
     public class EmployeesController : ApiController
     {
-        private readonly string _clientToken = @"578DB399-7047-4E82-921D-DA51E8F14A4E";
+        private readonly string _clientToken = Config.ClientToken;
 
-        private string _employeeWithLoginIdUrl = @"http://employeeapi.resortdataservices.com/api/employees/0?loginId={0}&clienttoken={1}";
+        private string _employeeWithLoginIdUrl = ApiRoutes.EmployeeWithLoginIdUrl;
 
-        private string _employeeWithIdUrl = @"http://employeeapi.resortdataservices.com/api/employees/{0}?loginId=&clienttoken={1}";
+        private string _employeeWithIdUrl = ApiRoutes.EmployeeWithIdUrl;
 
         // GET api/employees/5
         public Employee Get(int? loginId, int? id)

@@ -12,6 +12,7 @@ using SkiSchool.Web.Filters;
 using SkiSchool.Web.Models;
 using System.Net;
 using SkiSchool.Web.Helpers;
+using SkiSchool.Web.App_Start;
 
 namespace SkiSchool.Web.Controllers
 {
@@ -19,11 +20,11 @@ namespace SkiSchool.Web.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-        private readonly string _clientToken = @"578DB399-7047-4E82-921D-DA51E8F14A4E";
+        private readonly string _clientToken = Config.ClientToken;
 
-        private string _securityApiUrl = @"http://securityapi.resortdataservices.com/api/security?username={0}&password={1}";
+        private string _securityApiUrl = ApiRoutes.SecurityApiUrl; // @"http://securityapi.resortdataservices.com/api/security?username={0}&password={1}";
 
-        private string _employeeApiUrl = @"http://employeeapi.resortdataservices.com/api/employees/0?loginId={0}&clienttoken={1}";
+        private string _employeeApiUrl = ApiRoutes.EmployeeApiUrl; // @"http://employeeapi.resortdataservices.com/api/employees/0?loginId={0}&clienttoken={1}";
 
         //
         // POST: /Account/JsonLogin

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using SkiSchool.Web.App_Start;
 using SkiSchool.Web.Helpers;
 using SkiSchool.Web.Models;
 
@@ -11,13 +12,13 @@ namespace SkiSchool.Web.Controllers.Api
 {
     public class SchedulesController : ApiController
     {
-        private readonly string _clientToken = @"578DB399-7047-4E82-921D-DA51E8F14A4E";
+        private readonly string _clientToken = Config.ClientToken;
 
-        private string _employeeSchedules = @"http://scheduleapi.resortdataservices.com/api/employees/{0}/shifts?clienttoken={1}";
+        private string _employeeSchedules = ApiRoutes.EmployeeSchedules;
 
-        private string _availableSchedules = @"http://scheduleapi.resortdataservices.com/api/shifts/available?clienttoken={0}";
+        private string _availableSchedules = ApiRoutes.AvailableSchedules;
 
-        private string _updateScheduleWithEmployeeId = @"http://scheduleapi.resortdataservices.com/api/shifts/{0}?clienttoken={1}";
+        private string _updateScheduleWithEmployeeId = ApiRoutes.UpdateScheduleWithEmployeeIdRoute;
 
         // GET api/schedules
         public List<Schedule> Get(int? employeeId)
