@@ -1,0 +1,9 @@
+﻿.hero-unit {
+    background-image: url(../Images/groomed_corduroy.JPG);
+    background-repeat: none;
+    background-size: cover;
+}
+
+.hero-unit {
+    color: black;
+}

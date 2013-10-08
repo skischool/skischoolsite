@@ -1,0 +1,48 @@
+﻿<div class="container">
+      <div class="hero-unit">
+        <h1>Montage Mtn Ski School</h1>
+        <p>Returning for the 2013/2014 Winter Season Montage Mountain will be offering a variety of ski school classes for youngsters and adults. Classes will also be available for aspiring ski instructors! Full program details including enrollment windows, rates, and class schedules will be posted here as they become available. Please check back later this summer for these details and more!</p>
+        @*<p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>*@
+      </div>
+
+      <div class="row">
+        <div class="span6">
+          <h2>Ski School</h2>
+          <p>Take your skiing or riding to the next level by joining an adult group lesson. Learn more with a group of similarly-skilled skiers or riders as you polish your turns and master the bumps, steeps and deeps. Riders focus on all-mountain skills and gain confidence. Topics covered may include developing skills for all-mountain skiing/riding, carving the groomers, bumps, powder, steeps, racing and pipe & park.  You will build confidence and a chance to take your skiing/riding to the next level.</p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <div class="span6">
+          <h2>Snowboard School</h2>
+          <p>Take your skiing or riding to the next level by joining an adult group lesson. Learn more with a group of similarly-skilled skiers or riders as you polish your turns and master the bumps, steeps and deeps. Riders focus on all-mountain skills and gain confidence. Topics covered may include developing skills for all-mountain skiing/riding, carving the groomers, bumps, powder, steeps, racing and pipe & park.  You will build confidence and a chance to take your skiing/riding to the next level.</p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+       </div>
+      </div>
+
+     <div id="loginDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
+		@using (Html.BeginForm("JsonLogin", "Account", new { ReturnUrl = "/Employee" }, FormMethod.Post, new { id ="loginForm" }))
+        {
+         <div class="modal-header">
+				<a href="#" class="close" data-dismiss="modal">&times;</a>
+				<h3>Employee Login</h3>
+		    </div>
+             <div class="modal-body">
+            <div class="row">
+                <div class="span2">
+                    <input class="xlarge" id="xlInput" name="UserName" type="text" placeholder="Email" data-bind="value: userName"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span2">
+                    <input class="xlarge" id="xlInput" name="Password" type="password" placeholder="Password" data-bind="value: password"/>
+                </div>
+            </div>
+
+		</div>
+		<div class="modal-footer">
+            <input type="button" class="btn" onclick="accountNS.accountViewModel.hideLogin()" value="Cancel" />
+            <input type="submit" class="btn btn-primary" value="OK" />
+		</div>
+        }
+		
+    </div>
+</div>

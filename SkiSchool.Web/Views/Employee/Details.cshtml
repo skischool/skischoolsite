@@ -1,0 +1,151 @@
+﻿<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="span6">
+            <h2 class="well">Employee Information</h2>
+                    @*<div class="input-prepend">
+                        <span class="add-on">Id</span>
+                        <input readonly="readonly" data-bind="value: $root.id" />
+                    </div>
+                    <br />
+                    <div class="input-prepend">
+                        <span class="add-on">LoginId</span>
+                        <input readonly="readonly" data-bind="value: $root.loginId" />
+                    </div>
+                    <br />*@
+                    <div class="input-prepend">
+                        <span class="add-on">Title</span>
+                        <input readonly="readonly" data-bind="value: $root.employeeTitleDesc" />
+                    </div>
+                    <br />
+                    <div class="input-prepend">
+                        <span class="add-on">Type</span>
+                        <input readonly="readonly" data-bind="value: $root.employeeTypeDesc" />
+                    </div>
+                    <br />
+                    <div class="input-prepend">
+                        <span class="add-on">RosterId</span>
+                        <input readonly="readonly" data-bind="value: $root.rosterId" />
+                    </div>
+                    <br />
+                    <div class="input-prepend">
+                        <span class="add-on">IsLocal</span>
+                        <input readonly="readonly" data-bind="value: $root.isLocal" />
+                    </div>
+                    <br />
+                    <div class="input-prepend">
+                        <span class="add-on">Current</span>
+                        <input readonly="readonly" data-bind="value: $root.current" />
+                    </div>
+                    <br />
+                    
+        </div>
+        <div class="span6">
+            <h2 class="well">Personal Information</h2>
+            @*<div class="input-prepend">
+                <span class="add-on">Id</span>
+                <input readonly="readonly" data-bind="value: $root.personId" />
+            </div>*@
+            <div class="input-prepend">
+                <span class="add-on">FirstName</span>
+                <input readonly="readonly" data-bind="value: $root.firstName" />
+            </div>
+            <br />
+            <div class="input-prepend">
+                <span class="add-on">LastName</span>
+                <input readonly="readonly" data-bind="value: $root.lastName" />
+            </div>
+            <br />
+            <div class="input-prepend">
+                <span class="add-on">MiddleName</span>
+                <input readonly="readonly" data-bind="value: $root.middleName" />
+            </div>
+            <br />
+            <div class="input-prepend">
+                <span class="add-on">DOB</span>
+                <input readonly="readonly" data-bind="value: $root.dateOfBirth" />
+            </div>
+            <br />
+            @*<div class="input-prepend">
+                <span class="add-on">GenderId</span>
+                <input readonly="readonly" data-bind="value: $root.genderId" />
+            </div>*@
+        </div>
+    </div>
+
+    <hr />
+
+     <div class="row">
+        <div class="span12">
+            <h2 class="well">Schedule <button type="button" data-toggle="modal" data-target="#addScheduleModal">+</button></h2>
+
+            <div data-bind="visible: schedules().length === 0">
+                <p>No shifts have been selected.</p>
+            </div>
+
+            <table data-bind="visible: schedules().length > 0" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: schedules">
+                    <tr data-bind="attr: { id: id }">
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: date"></td>
+                        <td data-bind="text: start"></td> 
+                        <td data-bind="text: end"></td>
+                        <td><button data-bind="click: $parent.removeScheduleItem", value="id">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+      </div>
+</div>
+
+<!-- Add Schedule Modal -->
+
+<div id="addScheduleModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addScheduleLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="addModalLabel">Available Shifts</h3>
+    </div>
+    <div class="modal-body">
+            
+            <div data-bind="visible: availableSchedules().length === 0">
+                <p>No shifts are currently available.</p>
+            </div>
+            
+            <table data-bind="visible: availableSchedules().length > 0" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: availableSchedules">
+                    <tr data-bind="attr: { id: id }">
+                        <td data-bind="text: id"></td>
+                        <td data-bind="text: date"></td>
+                        <td data-bind="text: start"></td> 
+                        <td data-bind="text: end"></td>
+                        <td><button data-bind="click: $parent.addScheduleItem, value: id">Add</button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+
+<script src="~/Scripts/app/employee.js"></script>
