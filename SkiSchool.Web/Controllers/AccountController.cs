@@ -22,35 +22,71 @@ namespace SkiSchool.Web.Controllers
     {
         private readonly string _clientToken = Config.ClientToken;
 
-        private string _securityApiUrl = ApiRoutes.SecurityApiUrl; // @"http://securityapi.resortdataservices.com/api/security?username={0}&password={1}";
+        private string _securityApiUrl = ApiRoutes.SecurityApiUrl;
 
-        private string _employeeApiUrl = ApiRoutes.EmployeeApiUrl; // @"http://employeeapi.resortdataservices.com/api/employees/0?loginId={0}&clienttoken={1}";
+        private string _employeeApiUrl = ApiRoutes.EmployeeApiUrl;
 
         //
         // POST: /Account/JsonLogin
+
+        //[AllowAnonymous]
+        //[HttpPost]
+        //public ActionResult JsonLogin(LoginModel model, string returnUrl)
+        //{
+        //    HttpStatusCode httpStatusCode;
+
+        //    var securityApiUri = new Uri(string.Format(_securityApiUrl, model.UserName, model.Password));
+
+        //    var user = Invoke.Get<User>(securityApiUri, out httpStatusCode);
+
+        //    var employeeUri = new Uri(string.Format(_employeeApiUrl, user.Id, _clientToken));
+
+        //    var employee = Invoke.Get<Employee>(employeeUri, out httpStatusCode);
+
+        //    var employeeId = employee.Id;
+
+        //    if (ModelState.IsValid && user.Id > 0)
+        //    {
+        //        FormsAuthentication.SetAuthCookie(model.UserName, true);
+        //    }
+
+        //    return RedirectToAction("Details", "Employee", new { id = employeeId });
+        //}
 
         [AllowAnonymous]
         [HttpPost]
         public ActionResult JsonLogin(LoginModel model, string returnUrl)
         {
-            HttpStatusCode httpStatusCode;
-
-            var securityApiUri = new Uri(string.Format(_securityApiUrl, model.UserName, model.Password));
-
-            var user = Invoke.Get<User>(securityApiUri, out httpStatusCode);
-
-            var employeeUri = new Uri(string.Format(_employeeApiUrl, user.Id, _clientToken));
-
-            var employee = Invoke.Get<Employee>(employeeUri, out httpStatusCode);
-
-            var employeeId = employee.Id;
-
-            if (ModelState.IsValid && user.Id > 0)
+            if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(model.UserName, true);
+                if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+                {
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+
+                    HttpStatusCode httpStatusCode;
+
+                    var usersContext = new UsersContext();
+
+                    var userProfile = usersContext.UserProfiles.FirstOrDefault(u => u.UserName == model.UserName);
+
+                    var employeeWithLoginIdUri = new Uri(string.Format(ApiRoutes.EmployeeWithLoginIdUrl, userProfile.UserId, _clientToken));
+
+                    var employee = Invoke.Get<Employee>(employeeWithLoginIdUri, out httpStatusCode);
+
+                    return RedirectToAction("Details", "Employee", new { id = employee.Id });
+                    // return Json(new { success = true, redirect = returnUrl });
+                }
+                else
+                {
+                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
-            return RedirectToAction("Details", "Employee", new { id = employeeId });
+            return RedirectToAction("Index", "Home");
+            // If we got this far, something failed
+            // return Json(new { errors = GetErrorsFromModelState() });
         }
 
         //
@@ -84,7 +120,7 @@ namespace SkiSchool.Web.Controllers
         //
         // POST: /Account/LogOff
 
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult LogOff()
         {

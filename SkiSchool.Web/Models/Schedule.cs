@@ -38,5 +38,7 @@ namespace SkiSchool.Web.Models
         public Season Season { get; set; }
 
         public ShiftType ShiftType { get; set; }
+
+        public int Count { get; set; }
     }
 }

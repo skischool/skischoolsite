@@ -13,10 +13,13 @@ $(document).ready(function () {
                 event.preventDefault();
                 $.ajax({
                     url: '/Account/LogOff',
-                    type: 'POST',
-                    success: function () {
-                        window.location.href = '/Home/Index'
-                    }
+                    type: 'GET'
+                    //,
+                    //success: function () {
+                    //    window.location.href = '/Home/Index'
+                    //}
+                }).done(function () {
+                    window.location.href = '/Home/Index'
                 });
             });
         }

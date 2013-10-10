@@ -25,6 +25,7 @@ namespace SkiSchool.Web.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public Guid ClientToken { get; set; }
     }
 
     public class RegisterExternalLoginModel

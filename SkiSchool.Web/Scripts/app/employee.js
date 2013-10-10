@@ -116,7 +116,7 @@
     });
 
     // Loads the available employee shifts
-    $.getJSON('../../api/schedules?employeeId=', function (data) {
+    $.getJSON('../../api/schedules?shiftType=1', function (data) {
         $.each(data, function (key, val) {
             self.availableSchedules.push({
                 id: val.Id,

@@ -21,7 +21,7 @@ namespace SkiSchool.Web.Controllers.Api
         private string _updateScheduleWithEmployeeId = ApiRoutes.UpdateScheduleWithEmployeeIdRoute;
 
         // GET api/schedules
-        public List<Schedule> Get(int? employeeId)
+        public List<Schedule> GetEmployeeSchedules(int? employeeId)
         {
             HttpStatusCode httpStatusCode;
 
@@ -29,20 +29,47 @@ namespace SkiSchool.Web.Controllers.Api
             {
                 var employeeSchedulesUri = new Uri(string.Format(_employeeSchedules, int.Parse(employeeId.ToString()), _clientToken));
 
-                var schedules = Invoke.Get<List<Schedule>>(employeeSchedulesUri, out httpStatusCode);
+                var employeeSchedules = Invoke.Get<List<Schedule>>(employeeSchedulesUri, out httpStatusCode);
 
-                return schedules;
+                return employeeSchedules;
             }
             else
             {
                 var availableSchedulesUri = new Uri(string.Format(_availableSchedules, _clientToken));
 
-                var schedules = Invoke.Get<List<Schedule>>(availableSchedulesUri, out httpStatusCode);
+                var availableSchedules = Invoke.Get<List<Schedule>>(availableSchedulesUri, out httpStatusCode);
 
-                return schedules;
+                return availableSchedules;
             }
         }
 
+        // GET api/schedules?
+        public List<Schedule> GetAvailableSchedules(int shiftType)
+        {
+            HttpStatusCode httpStatusCode;
+
+            var availableSchedulesUri = new Uri(string.Format(_availableSchedules, _clientToken));
+
+            var availableSchedules = Invoke.Get<List<Schedule>>(availableSchedulesUri, out httpStatusCode);
+
+            var availableSchedulesByType = availableSchedules.Where(s => s.ShiftTypeId == shiftType);
+
+            var groupedAvailableSchedulesByType = from s in availableSchedulesByType
+                                                  group s by new { s.Date, s.Start } into grp
+                                                  select new Schedule()
+                                                  {
+                                                      Id = grp.Max(t => t.Id),
+                                                      Date = grp.FirstOrDefault().Date,
+                                                      Start = grp.FirstOrDefault().Start,
+                                                      End = grp.FirstOrDefault().End,
+                                                      ShiftTypeId = grp.FirstOrDefault().ShiftTypeId,
+                                                      PriorityId = grp.FirstOrDefault().PriorityId,
+                                                      SeasonId = grp.FirstOrDefault().SeasonId,
+                                                      Count = grp.Count()
+                                                  };
+
+            return groupedAvailableSchedulesByType.ToList();
+        }
 
         // PUT api/schedules?id={scheduleId}
         public Schedule Put([FromUri]int scheduleId, [FromBody]Schedule schedule)
