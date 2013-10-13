@@ -1,9 +1,51 @@
 ﻿<br />
 <br />
+<br />
 <div class="container">
     <div class="row">
         <div class="span6">
             <h2 class="well">Employee Information</h2>
+
+@*            <form class="form-horizontal">
+			    <div class="control-group">
+				    <label for="title" class="control-label">	
+					    Title
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.employeeTitleDesc" />
+				    </div>
+                    <br />
+                    <label for="title" class="control-label">	
+					    Type
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.employeeTypeDesc" />
+				    </div>
+                    <br />
+                    <label for="title" class="control-label">	
+					    RosterId
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.rosterId" />
+				    </div>
+                    <br />
+                    <label for="title" class="control-label">	
+					    IsLocal
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.isLocal" />
+				    </div>
+                    <br />
+                    <label for="title" class="control-label">	
+					    Current
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.current" />
+				    </div>
+			    </div>
+            </form>*@
+
+
                     <div class="input-prepend">
                         <span class="add-on">Title</span>
                         <input readonly="readonly" data-bind="value: $root.employeeTitleDesc" />
@@ -33,6 +75,40 @@
         </div>
         <div class="span6">
             <h2 class="well">Personal Information</h2>
+
+
+@*            <form class="form-horizontal">
+			    <div class="control-group">
+				    <label for="title" class="control-label">	
+					    First Name
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.firstName" />
+				    </div>
+                    <br />
+                    <label for="title" class="control-label">	
+					    Last Name
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.lastName" />
+				    </div>
+                    <br />
+                    <label for="title" class="control-label">	
+					    Middle Name
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.middleName" />
+				    </div>
+                    <br />
+                    <label for="title" class="control-label">	
+					    Date of Birth
+				    </label>
+				    <div class="controls">
+					    <input readonly="readonly" data-bind="value: $root.dateOfBirth" />
+				    </div>
+			    </div>
+            </form>*@
+
             <div class="input-prepend">
                 <span class="add-on">FirstName</span>
                 <input readonly="readonly" data-bind="value: $root.firstName" />
@@ -79,6 +155,10 @@
                 <span>The minimum 20 required shifts have NOT been selected.</span>
             </div>
             <!-- /ko -->
+
+            <div class="alert alert-info">
+                <span>You currently have <span data-bind="text: schedules().length"></span> shifts.</span>
+            </div>
 
             <div data-bind="visible: schedules().length === 0">
                 <p>No shifts have been selected.</p>

@@ -31,7 +31,7 @@ namespace SkiSchool.Web.Controllers.Api
 
                 var employeeSchedules = Invoke.Get<List<Schedule>>(employeeSchedulesUri, out httpStatusCode);
 
-                return employeeSchedules;
+                return employeeSchedules.OrderBy(s => s.Date).ToList();
             }
             else
             {
@@ -39,7 +39,7 @@ namespace SkiSchool.Web.Controllers.Api
 
                 var availableSchedules = Invoke.Get<List<Schedule>>(availableSchedulesUri, out httpStatusCode);
 
-                return availableSchedules;
+                return availableSchedules.OrderBy(s => s.Date).ToList();
             }
         }
 

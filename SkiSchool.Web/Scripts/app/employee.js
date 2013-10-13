@@ -78,7 +78,7 @@
 
             self.schedules.push({
                 id: d.Id,
-                date: moment(d.Date).format('YYYY-MM-DD'),
+                date: moment(d.Date).format('dddd, MMMM Do YYYY'),
                 seasonId: d.SeasonId,
                 employeeId: d.EmployeeId,
                 start: moment(d.Start).format('h:mm a'),
@@ -109,7 +109,7 @@
             self.availableSchedules.push({
                 id: d.Id,
                 seasonId: d.SeasonId,
-                date: moment(d.Date).format('YYYY-MM-DD'),
+                date: moment(d.Date).format('dddd, MMMM Do YYYY'),
                 start: moment(d.Start).format('h:mm a'),
                 end: moment(d.End).format('h:mm a')
             });
@@ -131,7 +131,7 @@
                 self.availableSchedules.push({
                     id: val.Id,
                     seasonId: val.SeasonId,
-                    date: moment(val.Date).format('YYYY-MM-DD'),
+                    date: moment(val.Date).format('dddd, MMMM Do YYYY'),
                     start: moment(val.Start).format('h:mm a'),
                     end: moment(val.End).format('h:mm a'),
                     typeId: val.TypeId
@@ -146,7 +146,7 @@
             self.schedules.push({
                 id: val.Id,
                 seasonId: val.SeasonId,
-                date: moment(val.Date).format('YYYY-MM-DD'),
+                date: moment(val.Date).format('dddd, MMMM Do YYYY'),
                 start: moment(val.Start).format('h:mm a'),
                 end: moment(val.End).format('h:mm a'),
                 employeeId: val.EmployeeId
@@ -183,7 +183,7 @@
                 self.availableSchedules.push({
                     id: val.Id,
                     seasonId: val.SeasonId,
-                    date: moment(val.Date).format('YYYY-MM-DD'),
+                    date: moment(val.Date).format('dddd, MMMM Do YYYY'),
                     start: moment(val.Start).format('h:mm a'),
                     end: moment(val.End).format('h:mm a'),
                     typeId: val.TypeId
