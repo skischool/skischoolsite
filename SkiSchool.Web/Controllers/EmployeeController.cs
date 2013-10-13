@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace SkiSchool.Web.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         //

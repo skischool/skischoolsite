@@ -62,6 +62,24 @@
         <div class="span12">
             <h2 class="well">Schedule <button type="button" data-toggle="modal" data-target="#addScheduleModal">+</button></h2>
 
+            <!-- ko if: isLocal -->
+            <div class="alert alert-success" data-bind="visible: schedules().length >= 32">
+                <span>Congratulations! You have selected the 32 required shifts.</span>
+            </div>
+            <div class="alert alert-danger" data-bind="visible: schedules().length < 32">
+                <span>The minimum 32 required shifts have NOT been selected.</span>
+            </div>
+            <!-- /ko -->
+
+            <!-- ko if: !isLocal -->
+            <div class="alert alert-success" data-bind="visible: schedules().length >= 20">
+                <span>Congratulations! You have selected the 20 required shifts.</span>
+            </div>
+            <div class="alert alert-danger" data-bind="visible: schedules().length < 20">
+                <span>The minimum 20 required shifts have NOT been selected.</span>
+            </div>
+            <!-- /ko -->
+
             <div data-bind="visible: schedules().length === 0">
                 <p>No shifts have been selected.</p>
             </div>
@@ -69,7 +87,6 @@
             <table data-bind="visible: schedules().length > 0" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Date</th>
                         <th>Start</th>
                         <th>End</th>
@@ -78,7 +95,6 @@
                 </thead>
                 <tbody data-bind="foreach: schedules">
                     <tr data-bind="attr: { id: id }">
-                        <td data-bind="text: id"></td>
                         <td data-bind="text: date"></td>
                         <td data-bind="text: start"></td> 
                         <td data-bind="text: end"></td>
@@ -96,9 +112,28 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
         <h3 id="addModalLabel">Available Shifts</h3>
+@*        <br />*@
+        
     </div>
     <div class="modal-body">
-            
+        <ul class="nav nav-pills">
+          <li class="active">
+              <a id="0" href="#" data-toggle="pill" data-bind="click: filterAvailableSchedule">All</a>
+          </li>
+          <li>
+              <a id="12" href="#" data-toggle="pill" data-bind="click: filterAvailableSchedule">December</a>
+          </li>
+          <li>
+              <a id="1" href="#" data-toggle="pill" data-bind="click: filterAvailableSchedule">January</a>
+          </li>
+          <li>
+              <a id="2" href="#" data-toggle="pill" data-bind="click: filterAvailableSchedule">February</a>
+          </li>
+          <li>
+              <a id="3" href="#" data-toggle="pill" data-bind="click: filterAvailableSchedule">March</a>
+          </li>
+        </ul>
+
             <div data-bind="visible: availableSchedules().length === 0">
                 <p>No shifts are currently available.</p>
             </div>
@@ -106,7 +141,6 @@
             <table data-bind="visible: availableSchedules().length > 0" class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Id</th>
                         <th>Date</th>
                         <th>Start</th>
                         <th>End</th>
@@ -115,7 +149,6 @@
                 </thead>
                 <tbody data-bind="foreach: availableSchedules">
                     <tr data-bind="attr: { id: id }">
-                        <td data-bind="text: id"></td>
                         <td data-bind="text: date"></td>
                         <td data-bind="text: start"></td> 
                         <td data-bind="text: end"></td>

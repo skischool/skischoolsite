@@ -6,7 +6,7 @@
         var url = document.URL;
         var start = url.lastIndexOf("/") + 1;
         var end = url.length;
-        var id = url.substring(start, end);
+        var id = url.substring(start, end).replace('#', '');
 
         return id;
     };
@@ -29,6 +29,23 @@
     self.employeeTypeDesc = ko.observable();
     self.employeeTypeName = ko.observable();
     self.employeeTypeId = ko.observable();
+    self.shiftTypeId = ko.computed(function () {
+
+        var typeId = 0;
+        var empTitleId = self.employeeTitleId();
+
+        if (empTitleId === 5) {
+            typeId = 6;
+        } else if (empTitleId === 6) {
+            typeId = 7;
+        } else if (empTitleId === 7) {
+            typeId = 8;
+        } else if (empTitleId === 10) {
+            typeId = 9
+        }
+
+        return typeId;
+    });
 
     self.schedules = ko.observableArray([]);
     self.availableSchedules = ko.observableArray([]);
@@ -44,8 +61,6 @@
             End: data.end
         };
 
-        // $('button[value="' + data.id + '"]').attr('disabled', 'disabled')
-
         $.ajax({
             type: 'PUT',
             url: '../../api/schedules?scheduleId=' + data.id,
@@ -57,13 +72,17 @@
                 return item.id === d.Id;
             });
 
+            //self.availableSchedules.remove(function (item) {
+            //    return item.date === d.date;
+            //});
+
             self.schedules.push({
                 id: d.Id,
                 date: moment(d.Date).format('YYYY-MM-DD'),
                 seasonId: d.SeasonId,
                 employeeId: d.EmployeeId,
-                start: moment(d.Start).format('HH:mm'),
-                end: moment(d.End).format('HH:mm')
+                start: moment(d.Start).format('h:mm a'),
+                end: moment(d.End).format('h:mm a')
             });
         });
     };
@@ -76,8 +95,6 @@
             Start: data.start,
             End: data.end
         };
-
-        // $('button[value="' + data.id + '"]').attr('disabled', 'disabled')
 
         $.ajax({
             type: 'PUT',
@@ -93,44 +110,51 @@
                 id: d.Id,
                 seasonId: d.SeasonId,
                 date: moment(d.Date).format('YYYY-MM-DD'),
-                start: moment(d.Start).format('HH:mm'),
-                end: moment(d.End).format('HH:mm')
+                start: moment(d.Start).format('h:mm a'),
+                end: moment(d.End).format('h:mm a')
             });
         });
     };
 
-    
+    self.filterAvailableSchedule = function (data, event) {
 
-    // Loads the selected employee shifts
-    $.getJSON('../../api/schedules?employeeId=1', function (data) {
+        var selectedMonth = event.target.id;
+        var availableEmployeeShiftsUrl = selectedMonth === "0" ?
+            '../../api/schedules?shiftType=' + self.shiftTypeId() + '&employeeId=' + employeeId() + '&month=' :
+            '../../api/schedules?shiftType=' + self.shiftTypeId() + '&employeeId=' + employeeId() + '&month=' + selectedMonth;
+
+        $.getJSON(availableEmployeeShiftsUrl, function (data) {
+
+            self.availableSchedules.removeAll();
+
+            $.each(data, function (key, val) {
+                self.availableSchedules.push({
+                    id: val.Id,
+                    seasonId: val.SeasonId,
+                    date: moment(val.Date).format('YYYY-MM-DD'),
+                    start: moment(val.Start).format('h:mm a'),
+                    end: moment(val.End).format('h:mm a'),
+                    typeId: val.TypeId
+                });
+            });
+        });
+    };
+
+        // Loads the selected employee shifts
+        $.getJSON('../../api/schedules?employeeId=' + employeeId(), function (data) {
         $.each(data, function (key, val) {
             self.schedules.push({
                 id: val.Id,
                 seasonId: val.SeasonId,
                 date: moment(val.Date).format('YYYY-MM-DD'),
-                start: moment(val.Start).format('HH:mm'),
-                end: moment(val.End).format('HH:mm'),
+                start: moment(val.Start).format('h:mm a'),
+                end: moment(val.End).format('h:mm a'),
                 employeeId: val.EmployeeId
             });
         });
     });
 
-    // Loads the available employee shifts
-    $.getJSON('../../api/schedules?shiftType=1', function (data) {
-        $.each(data, function (key, val) {
-            self.availableSchedules.push({
-                id: val.Id,
-                seasonId: val.SeasonId,
-                date: moment(val.Date).format('YYYY-MM-DD'),
-                start: moment(val.Start).format('HH:mm'),
-                end: moment(val.End).format('HH:mm'),
-                typeId: val.TypeId
-            });
-        });
-    });
-
-
-    $.getJSON('../../api/employees?loginId=&id=' + employeeId(), function (data) {
+        $.getJSON('../../api/employees?loginId=&id=' + employeeId(), function (data) {
         self.clientToken(data.ClientToken);
         self.current(data.Current === true ? 'Yes' : 'No');
         self.id(data.Id);
@@ -149,7 +173,26 @@
         self.employeeTypeDesc(data.EmployeeType.Description);
         self.employeeTypeName(data.EmployeeType.Name);
         self.employeeTypeId(data.EmployeeType.Id);
+    }).done(function () {
+
+        // Loads the available employee shifts
+        var availableEmployeeShiftsUrl = '../../api/schedules?shiftType=' + self.shiftTypeId() + '&employeeId=' + employeeId() + '&month=';
+
+        $.getJSON(availableEmployeeShiftsUrl, function (data) {
+            $.each(data, function (key, val) {
+                self.availableSchedules.push({
+                    id: val.Id,
+                    seasonId: val.SeasonId,
+                    date: moment(val.Date).format('YYYY-MM-DD'),
+                    start: moment(val.Start).format('h:mm a'),
+                    end: moment(val.End).format('h:mm a'),
+                    typeId: val.TypeId
+                });
+            });
+        });
     });
+
+    
 
 }
 

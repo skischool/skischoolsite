@@ -26,7 +26,10 @@
               <a class="brand" href="#">Montage Mtn Ski School</a>
               <div class="nav-collapse collapse">
                   @if (Request.IsAuthenticated) {
-                        <a class="btn pull-right" id="logout" onclick="accountNS.accountViewModel.logout()">LogOff</a>   
+                      using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logout" })) {
+                          <a class="btn pull-right" id="logout" onclick="accountNS.accountViewModel.logout()">LogOff</a>
+                      }
+                       
                   } else {
                         <a class="btn pull-right" href="#loginDialog" data-toggle="modal">Login</a>   
                   }     

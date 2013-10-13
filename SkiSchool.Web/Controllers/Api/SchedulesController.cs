@@ -44,7 +44,7 @@ namespace SkiSchool.Web.Controllers.Api
         }
 
         // GET api/schedules?
-        public List<Schedule> GetAvailableSchedules(int shiftType)
+        public List<Schedule> GetAvailableSchedules(int shiftType, int employeeId, int? month)
         {
             HttpStatusCode httpStatusCode;
 
@@ -52,7 +52,13 @@ namespace SkiSchool.Web.Controllers.Api
 
             var availableSchedules = Invoke.Get<List<Schedule>>(availableSchedulesUri, out httpStatusCode);
 
-            var availableSchedulesByType = availableSchedules.Where(s => s.ShiftTypeId == shiftType);
+            var employeeSchedulesUri = new Uri(string.Format(_employeeSchedules, int.Parse(employeeId.ToString()), _clientToken));
+
+            var employeeSchedules = Invoke.Get<List<Schedule>>(employeeSchedulesUri, out httpStatusCode);
+
+            var employeeSelectedDates = employeeSchedules.Select(e => e.Date);
+
+            var availableSchedulesByType = availableSchedules.Where(s => s.ShiftTypeId == shiftType && !employeeSelectedDates.Contains(s.Date));
 
             var groupedAvailableSchedulesByType = from s in availableSchedulesByType
                                                   group s by new { s.Date, s.Start } into grp
@@ -68,7 +74,9 @@ namespace SkiSchool.Web.Controllers.Api
                                                       Count = grp.Count()
                                                   };
 
-            return groupedAvailableSchedulesByType.ToList();
+            return month != null ? 
+                groupedAvailableSchedulesByType.Where(s => s.Date.Month == month).OrderBy(s => s.Date).ToList() : 
+                groupedAvailableSchedulesByType.OrderBy(s => s.Date).ToList();
         }
 
         // PUT api/schedules?id={scheduleId}
