@@ -4,123 +4,58 @@
 <div class="container">
     <div class="row">
         <div class="span6">
-            <h2 class="well">Employee Information</h2>
+            <h2 class="well">Employee Information
+                <div id="employee-loading">
+                    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
+                </div>
+            </h2>
 
-@*            <form class="form-horizontal">
-			    <div class="control-group">
-				    <label for="title" class="control-label">	
-					    Title
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.employeeTitleDesc" />
-				    </div>
-                    <br />
-                    <label for="title" class="control-label">	
-					    Type
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.employeeTypeDesc" />
-				    </div>
-                    <br />
-                    <label for="title" class="control-label">	
-					    RosterId
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.rosterId" />
-				    </div>
-                    <br />
-                    <label for="title" class="control-label">	
-					    IsLocal
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.isLocal" />
-				    </div>
-                    <br />
-                    <label for="title" class="control-label">	
-					    Current
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.current" />
-				    </div>
-			    </div>
-            </form>*@
-
-
-                    <div class="input-prepend">
-                        <span class="add-on">Title</span>
-                        <input readonly="readonly" data-bind="value: $root.employeeTitleDesc" />
-                    </div>
-                    <br />
-                    <div class="input-prepend">
-                        <span class="add-on">Type</span>
-                        <input readonly="readonly" data-bind="value: $root.employeeTypeDesc" />
-                    </div>
-                    <br />
-                    <div class="input-prepend">
-                        <span class="add-on">RosterId</span>
-                        <input readonly="readonly" data-bind="value: $root.rosterId" />
-                    </div>
-                    <br />
-                    <div class="input-prepend">
-                        <span class="add-on">IsLocal</span>
-                        <input readonly="readonly" data-bind="value: $root.isLocal" />
-                    </div>
-                    <br />
-                    <div class="input-prepend">
-                        <span class="add-on">Current</span>
-                        <input readonly="readonly" data-bind="value: $root.current" />
-                    </div>
-                    <br />
+            <div class="input-prepend">
+                <span class="add-on">Title</span>
+                <input readonly="readonly" data-bind="value: $root.employeeTitleDesc" />
+            </div>
+            <br />
+            <div class="input-prepend">
+                <span class="add-on">Type</span>
+                <input readonly="readonly" data-bind="value: $root.employeeTypeDesc" />
+            </div>
+            <br />
+            <div class="input-prepend">
+                <span class="add-on">Roster Id</span>
+                <input readonly="readonly" data-bind="value: $root.rosterId" />
+            </div>
+            <br />
+            <div class="input-prepend">
+                <span class="add-on">Local</span>
+                <input readonly="readonly" data-bind="value: $root.isLocal" />
+            </div>
+            <br />
+            <div class="input-prepend">
+                <span class="add-on">Current</span>
+                <input readonly="readonly" data-bind="value: $root.current" />
+            </div>
+            <br />
                     
         </div>
         <div class="span6">
-            <h2 class="well">Personal Information</h2>
-
-
-@*            <form class="form-horizontal">
-			    <div class="control-group">
-				    <label for="title" class="control-label">	
-					    First Name
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.firstName" />
-				    </div>
-                    <br />
-                    <label for="title" class="control-label">	
-					    Last Name
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.lastName" />
-				    </div>
-                    <br />
-                    <label for="title" class="control-label">	
-					    Middle Name
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.middleName" />
-				    </div>
-                    <br />
-                    <label for="title" class="control-label">	
-					    Date of Birth
-				    </label>
-				    <div class="controls">
-					    <input readonly="readonly" data-bind="value: $root.dateOfBirth" />
-				    </div>
-			    </div>
-            </form>*@
+            <h2 class="well">Personal Information
+                <div id="personal-loading">
+                    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
+                </div>
+            </h2>
 
             <div class="input-prepend">
-                <span class="add-on">FirstName</span>
+                <span class="add-on">First Name</span>
                 <input readonly="readonly" data-bind="value: $root.firstName" />
             </div>
             <br />
             <div class="input-prepend">
-                <span class="add-on">LastName</span>
+                <span class="add-on">Last Name</span>
                 <input readonly="readonly" data-bind="value: $root.lastName" />
             </div>
             <br />
             <div class="input-prepend">
-                <span class="add-on">MiddleName</span>
+                <span class="add-on">Middle Name</span>
                 <input readonly="readonly" data-bind="value: $root.middleName" />
             </div>
             <br />
@@ -135,33 +70,45 @@
     <hr />
 
      <div class="row">
-        <div class="span12">
-            <h2 class="well">Schedule <button type="button" data-toggle="modal" data-target="#addScheduleModal">+</button></h2>
+        <div id="selected-schedules" class="span12">
+            <h2 class="well">Schedule 
+                <button type="button" data-toggle="modal" data-target="#addScheduleModal">+</button>
 
-            <!-- ko if: isLocal -->
-            <div class="alert alert-success" data-bind="visible: schedules().length >= 32">
-                <span>Congratulations! You have selected the 32 required shifts.</span>
-            </div>
-            <div class="alert alert-danger" data-bind="visible: schedules().length < 32">
-                <span>The minimum 32 required shifts have NOT been selected.</span>
-            </div>
-            <!-- /ko -->
+                <div id="selected-loading">
+                    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
+                </div>
+            </h2>
 
-            <!-- ko if: !isLocal -->
-            <div class="alert alert-success" data-bind="visible: schedules().length >= 20">
-                <span>Congratulations! You have selected the 20 required shifts.</span>
-            </div>
-            <div class="alert alert-danger" data-bind="visible: schedules().length < 20">
-                <span>The minimum 20 required shifts have NOT been selected.</span>
-            </div>
-            <!-- /ko -->
+            
 
-            <div class="alert alert-info">
-                <span>You currently have <span data-bind="text: schedules().length"></span> shifts.</span>
-            </div>
+            <div id="schedule-alerts">
 
-            <div data-bind="visible: schedules().length === 0">
-                <p>No shifts have been selected.</p>
+                <!-- ko if: isLocal -->
+                <div class="alert alert-success" data-bind="visible: schedules().length >= 32">
+                    <span>Congratulations! You have selected the 32 required shifts.</span>
+                </div>
+                <div class="alert alert-danger" data-bind="visible: schedules().length < 32">
+                    <span>The minimum 32 required shifts have NOT been selected.</span>
+                </div>
+                <!-- /ko -->
+
+                <!-- ko if: !isLocal -->
+                <div class="alert alert-success" data-bind="visible: schedules().length >= 20">
+                    <span>Congratulations! You have selected the 20 required shifts.</span>
+                </div>
+                <div class="alert alert-danger" data-bind="visible: schedules().length < 20">
+                    <span>The minimum 20 required shifts have NOT been selected.</span>
+                </div>
+                <!-- /ko -->
+
+                <div class="alert alert-info">
+                    <span>You currently have <span data-bind="text: schedules().length"></span> shifts.</span>
+                </div>
+
+                <div data-bind="visible: schedules().length === 0">
+                    <p>No shifts have been selected.</p>
+                </div>
+
             </div>
 
             <table data-bind="visible: schedules().length > 0" class="table table-striped">
@@ -191,7 +138,11 @@
 <div id="addScheduleModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addScheduleLabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h3 id="addModalLabel">Available Shifts</h3>
+        <h3 id="addModalLabel">Available Shifts
+                <div id="available-loading">
+                    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
+                </div>
+        </h3>
 @*        <br />*@
         
     </div>

@@ -123,6 +123,11 @@
             '../../api/schedules?shiftType=' + self.shiftTypeId() + '&employeeId=' + employeeId() + '&month=' :
             '../../api/schedules?shiftType=' + self.shiftTypeId() + '&employeeId=' + employeeId() + '&month=' + selectedMonth;
 
+        
+
+        $('#available-loading').show();
+        $(':button').attr("disabled", "disabled");
+
         $.getJSON(availableEmployeeShiftsUrl, function (data) {
 
             self.availableSchedules.removeAll();
@@ -137,46 +142,65 @@
                     typeId: val.TypeId
                 });
             });
+        }).done(function () {
+            $('#available-loading').hide();
+            $(':button').removeAttr("disabled");
         });
     };
 
         // Loads the selected employee shifts
-        $.getJSON('../../api/schedules?employeeId=' + employeeId(), function (data) {
-        $.each(data, function (key, val) {
-            self.schedules.push({
-                id: val.Id,
-                seasonId: val.SeasonId,
-                date: moment(val.Date).format('dddd, MMMM Do YYYY'),
-                start: moment(val.Start).format('h:mm a'),
-                end: moment(val.End).format('h:mm a'),
-                employeeId: val.EmployeeId
+    $.getJSON('../../api/schedules?employeeId=' + employeeId(), function (data) {
+
+            $('#selected-loading').show();
+            $('#schedule-alerts').hide();
+            $(':button').attr("disabled", "disabled");
+
+            $.each(data, function (key, val) {
+                self.schedules.push({
+                    id: val.Id,
+                    seasonId: val.SeasonId,
+                    date: moment(val.Date).format('dddd, MMMM Do YYYY'),
+                    start: moment(val.Start).format('h:mm a'),
+                    end: moment(val.End).format('h:mm a'),
+                    employeeId: val.EmployeeId
+                });
             });
+        }).done(function () {
+            $('#selected-loading').hide();
+            $('#schedule-alerts').show();
+            $(':button').removeAttr("disabled");
         });
-    });
+
+        $('#employee-loading').show();
+        $('#personal-loading').show();
 
         $.getJSON('../../api/employees?loginId=&id=' + employeeId(), function (data) {
-        self.clientToken(data.ClientToken);
-        self.current(data.Current === true ? 'Yes' : 'No');
-        self.id(data.Id);
-        self.isLocal(data.IsLocal === true ? 'Yes' : 'No');
-        self.loginId(data.LoginId);
-        self.rosterId(data.RosterId);
-        self.personId(data.Person.Id);
-        self.firstName(data.Person.FirstName);
-        self.lastName(data.Person.LastName);
-        self.middleName(data.Person.MiddleName);
-        self.dateOfBirth(moment(data.Person.DateOfBirth).format('YYYY-MM-DD'));
-        self.genderId(data.Person.GenderId);
-        self.employeeTitleDesc(data.EmployeeTitle.Description);
-        self.employeeTitleName(data.EmployeeTitle.Name);
-        self.employeeTitleId(data.EmployeeTitle.Id);
-        self.employeeTypeDesc(data.EmployeeType.Description);
-        self.employeeTypeName(data.EmployeeType.Name);
-        self.employeeTypeId(data.EmployeeType.Id);
+            self.clientToken(data.ClientToken);
+            self.current(data.Current === true ? 'Yes' : 'No');
+            self.id(data.Id);
+            self.isLocal(data.IsLocal === true ? 'Yes' : 'No');
+            self.loginId(data.LoginId);
+            self.rosterId(data.RosterId);
+            self.personId(data.Person.Id);
+            self.firstName(data.Person.FirstName);
+            self.lastName(data.Person.LastName);
+            self.middleName(data.Person.MiddleName);
+            self.dateOfBirth(moment(data.Person.DateOfBirth).format('YYYY-MM-DD'));
+            self.genderId(data.Person.GenderId);
+            self.employeeTitleDesc(data.EmployeeTitle.Description);
+            self.employeeTitleName(data.EmployeeTitle.Name);
+            self.employeeTitleId(data.EmployeeTitle.Id);
+            self.employeeTypeDesc(data.EmployeeType.Description);
+            self.employeeTypeName(data.EmployeeType.Name);
+            self.employeeTypeId(data.EmployeeType.Id);
     }).done(function () {
+
+        $('#employee-loading').hide();
+        $('#personal-loading').hide();
 
         // Loads the available employee shifts
         var availableEmployeeShiftsUrl = '../../api/schedules?shiftType=' + self.shiftTypeId() + '&employeeId=' + employeeId() + '&month=';
+        $(':button').attr("disabled", "disabled");
 
         $.getJSON(availableEmployeeShiftsUrl, function (data) {
             $.each(data, function (key, val) {
@@ -189,13 +213,14 @@
                     typeId: val.TypeId
                 });
             });
+        }).done(function () {
+            $('#available-loading').hide();
+            $(':button').removeAttr("disabled");
         });
     });
-
-    
-
 }
 
 $(document).ready(
+
     ko.applyBindings(new EmployeeViewModel())
 );

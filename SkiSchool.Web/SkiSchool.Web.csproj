@@ -280,6 +280,7 @@
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\FileSystem.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\ajax-loader.gif" />
     <Content Include="Scripts\app\account.js" />
     <Content Include="Scripts\app\employee.js" />
     <Content Include="Scripts\app\routes.js" />
