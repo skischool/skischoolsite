@@ -7,6 +7,9 @@ $(document).ready(function () {
 
         hideLogin: function () {
             $('#loginDialog').modal('toggle');
+            $('#username').val('');
+            $('#password').val('');
+            $('#login-error').hide();
         },
         logout: logout = function () {
             $('#logout').click(function (event) {
@@ -14,10 +17,6 @@ $(document).ready(function () {
                 $.ajax({
                     url: '/Account/LogOff',
                     type: 'GET'
-                    //,
-                    //success: function () {
-                    //    window.location.href = '/Home/Index'
-                    //}
                 }).done(function () {
                     window.location.href = '/Home/Index'
                 });

@@ -55,7 +55,7 @@ namespace SkiSchool.Web.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult JsonLogin(LoginModel model, string returnUrl)
+        public JsonResult JsonLogin(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -73,21 +73,56 @@ namespace SkiSchool.Web.Controllers
 
                     var employee = Invoke.Get<Employee>(employeeWithLoginIdUri, out httpStatusCode);
 
-                    return RedirectToAction("Details", "Employee", new { id = employee.Id });
-                    // return Json(new { success = true, redirect = returnUrl });
+                    returnUrl = string.Format("{0}/Details/{1}", returnUrl, employee.Id.ToString());
+
+                    return Json(new { success = true, redirect = returnUrl });
                 }
                 else
                 {
                     ModelState.AddModelError("", "The user name or password provided is incorrect.");
-
-                    return RedirectToAction("Index", "Home");
                 }
             }
 
-            return RedirectToAction("Index", "Home");
             // If we got this far, something failed
-            // return Json(new { errors = GetErrorsFromModelState() });
+            return Json(new { errors = "error" });
         }
+
+
+        //[AllowAnonymous]
+        //[HttpPost]
+        //public ActionResult JsonLogin(LoginModel model, string returnUrl)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+        //        {
+        //            FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+
+        //            HttpStatusCode httpStatusCode;
+
+        //            var usersContext = new UsersContext();
+
+        //            var userProfile = usersContext.UserProfiles.FirstOrDefault(u => u.UserName == model.UserName);
+
+        //            var employeeWithLoginIdUri = new Uri(string.Format(ApiRoutes.EmployeeWithLoginIdUrl, userProfile.UserId, _clientToken));
+
+        //            var employee = Invoke.Get<Employee>(employeeWithLoginIdUri, out httpStatusCode);
+
+        //            return RedirectToAction("Details", "Employee", new { id = employee.Id });
+        //            // return Json(new { success = true, redirect = returnUrl });
+        //        }
+        //        else
+        //        {
+        //            ModelState.AddModelError("", "The user name or password provided is incorrect.");
+
+        //            return RedirectToAction("Index", "Home");
+        //        }
+        //    }
+
+        //    return RedirectToAction("Index", "Home");
+        //    // If we got this far, something failed
+        //    // return Json(new { errors = GetErrorsFromModelState() });
+        //}
 
         //
         // GET: /Account/Login

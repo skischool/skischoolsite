@@ -19,24 +19,27 @@
       </div>
 
      <div id="loginDialog" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="windowTitleLabel" aria-hidden="true">
-		@using (Html.BeginForm("JsonLogin", "Account", new { ReturnUrl = "/Employee" }, FormMethod.Post, new { id ="loginForm" }))
-        {
+		@using (Html.BeginForm("JsonLogin", "Account", new { ReturnUrl = "/Employee" }, FormMethod.Post, new { id = "loginForm" }))
+  {
          <div class="modal-header">
 				<a href="#" class="close" data-dismiss="modal">&times;</a>
 				<h3>Employee Login</h3>
 		    </div>
              <div class="modal-body">
-            <div class="row">
-                <div class="span2">
-                    <input class="xlarge" id="xlInput" name="UserName" type="text" placeholder="Email" data-bind="value: userName"/>
+                <div class="alert alert-danger" id="login-error">
+                    <span>Unsuccessful login.</span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="span2">
-                    <input class="xlarge" id="xlInput" name="Password" type="password" placeholder="Password" data-bind="value: password"/>
-                </div>
-            </div>
 
+                <div class="row">
+                    <div class="span2">
+                        <input class="xlarge" id="username" name="UserName" type="text" placeholder="Email" autocomplete="off" data-bind="value: userName"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span2">
+                        <input class="xlarge" id="password" name="Password" type="password" placeholder="Password" autocomplete="off" data-bind="value: password"/>
+                    </div>
+                </div>
 		</div>
 		<div class="modal-footer">
             <input type="button" class="btn" onclick="accountNS.accountViewModel.hideLogin()" value="Cancel" />
