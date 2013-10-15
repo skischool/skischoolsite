@@ -283,6 +283,7 @@
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Scripts\app\account.js" />
     <Content Include="Scripts\app\employee.js" />
+    <Content Include="Scripts\app\google-analytics.js" />
     <Content Include="Scripts\app\login.js" />
     <Content Include="Scripts\app\routes.js" />
     <Content Include="Scripts\bootstrap.js" />

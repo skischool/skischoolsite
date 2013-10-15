@@ -3,46 +3,44 @@
 <br />
 <div class="container">
     <div class="row">
-        <div class="span6">
-            <h2 class="well">Employee Information
-                <div id="employee-loading">
-                    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
-                </div>
-            </h2>
+
+        <form class="span6">
+            <h2 class="well">Employee Information</h2>
 
             <div class="input-prepend">
                 <span class="add-on">Title</span>
+                @*<label>Title</label>*@
                 <input readonly="readonly" data-bind="value: $root.employeeTitleDesc" />
             </div>
             <br />
             <div class="input-prepend">
                 <span class="add-on">Type</span>
+               @*<label>Type</label>*@
                 <input readonly="readonly" data-bind="value: $root.employeeTypeDesc" />
             </div>
             <br />
             <div class="input-prepend">
                 <span class="add-on">Roster Id</span>
+                @*<label>Roster Id</label>*@
                 <input readonly="readonly" data-bind="value: $root.rosterId" />
             </div>
             <br />
             <div class="input-prepend">
                 <span class="add-on">Local</span>
+                @*<label>Local</label>*@
                 <input readonly="readonly" data-bind="value: $root.isLocal" />
             </div>
             <br />
             <div class="input-prepend">
                 <span class="add-on">Current</span>
+                @*<label>Current</label>*@
                 <input readonly="readonly" data-bind="value: $root.current" />
             </div>
             <br />
                     
-        </div>
+        </form>
         <div class="span6">
-            <h2 class="well">Personal Information
-                <div id="personal-loading">
-                    <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
-                </div>
-            </h2>
+            <h2 class="well">Personal Information</h2>
 
             <div class="input-prepend">
                 <span class="add-on">First Name</span>
@@ -78,8 +76,6 @@
                     <img src="~/Images/ajax-loader.gif" class="ajax-loader" />
                 </div>
             </h2>
-
-            
 
             <div id="schedule-alerts">
 
