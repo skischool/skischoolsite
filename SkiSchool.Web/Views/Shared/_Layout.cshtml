@@ -26,6 +26,13 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="brand" href="#">Montage Mtn Ski School</a>
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Admin")) {
+                    <ul class="nav navbar-nav">
+                        <li><a href="/Employees">Employees</a></li>
+                        <li><a href="/Schedules">Schedules</a></li>
+                        <li><a href="/Security">Security</a></li>
+                    </ul>
+                }
               <div class="nav-collapse collapse">
                   @if (Request.IsAuthenticated) {
                       using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logout", @class = "pull-right" })) {

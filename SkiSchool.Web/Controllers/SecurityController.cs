@@ -7,24 +7,14 @@ using SkiSchool.Web.Filters;
 
 namespace SkiSchool.Web.Controllers
 {
-    [Authorize]
-    public class EmployeeController : Controller
+    [Authorize(Roles = "Admin")]
+    public class SecurityController : Controller
     {
         //
-        // GET: /Employee/
+        // GET: /Security/
 
         public ActionResult Index()
         {
-            return View();
-        }
-
-        //
-        // GET: /Employee/Details?id=1
-
-        [Authorize(Roles = "Admin,Manager,User")]
-        public ActionResult Details(int id)
-        {
-
             return View();
         }
 

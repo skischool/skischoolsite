@@ -17,7 +17,6 @@ using SkiSchool.Web.App_Start;
 namespace SkiSchool.Web.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         private readonly string _clientToken = Config.ClientToken;
@@ -25,33 +24,6 @@ namespace SkiSchool.Web.Controllers
         private string _securityApiUrl = ApiRoutes.SecurityApiUrl;
 
         private string _employeeApiUrl = ApiRoutes.EmployeeApiUrl;
-
-        //
-        // POST: /Account/JsonLogin
-
-        //[AllowAnonymous]
-        //[HttpPost]
-        //public ActionResult JsonLogin(LoginModel model, string returnUrl)
-        //{
-        //    HttpStatusCode httpStatusCode;
-
-        //    var securityApiUri = new Uri(string.Format(_securityApiUrl, model.UserName, model.Password));
-
-        //    var user = Invoke.Get<User>(securityApiUri, out httpStatusCode);
-
-        //    var employeeUri = new Uri(string.Format(_employeeApiUrl, user.Id, _clientToken));
-
-        //    var employee = Invoke.Get<Employee>(employeeUri, out httpStatusCode);
-
-        //    var employeeId = employee.Id;
-
-        //    if (ModelState.IsValid && user.Id > 0)
-        //    {
-        //        FormsAuthentication.SetAuthCookie(model.UserName, true);
-        //    }
-
-        //    return RedirectToAction("Details", "Employee", new { id = employeeId });
-        //}
 
         [AllowAnonymous]
         [HttpPost]
