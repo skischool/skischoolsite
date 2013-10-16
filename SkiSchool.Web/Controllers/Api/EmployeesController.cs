@@ -18,6 +18,20 @@ namespace SkiSchool.Web.Controllers.Api
 
         private string _employeeWithIdUrl = ApiRoutes.EmployeeWithIdUrl;
 
+        private string _employeesUrl = ApiRoutes.Employees;
+
+        // GET api/employees
+        public List<Employee> GetAll()
+        {
+            HttpStatusCode httpStatusCode;
+
+            var employeesUri = new Uri(string.Format(_employeesUrl, _clientToken));
+
+            var employees = Invoke.Get<List<Employee>>(employeesUri, out httpStatusCode);
+
+            return employees.OrderBy(e => e.Person.LastName).ToList();
+        }
+
         // GET api/employees/5
         public Employee Get(int? loginId, int? id)
         {

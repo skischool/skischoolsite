@@ -49,6 +49,14 @@ namespace SkiSchool.Web.App_Start
             }
         }
 
+        public static string Employees
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["EmployeesUrl"];
+            }
+        }
+
         public static string SecurityApiUrl
         {
             get

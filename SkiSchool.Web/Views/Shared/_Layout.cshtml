@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="">
      <head>
         <meta charset="utf-8" />
         <title>Montage Mtn Ski School</title>
@@ -8,12 +8,14 @@
          <link href="~/Content/bootstrap-responsive.css" rel="stylesheet" />
          <link href="~/Content/Site.css" rel="stylesheet" />
          <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+         <script src="~/Scripts/underscore.min.js"></script>
          <script src="~/Scripts/moment.min.js"></script>
          <script src="~/Scripts/knockout-2.3.0.js"></script>
          <script src="~/Scripts/knockout.mapping-latest.js"></script>
          <script src="~/Scripts/bootstrap.min.js"></script>
          <script src="~/Scripts/app/account.js"></script>
          <script src="~/Scripts/app/login.js"></script>
+         <script src="~/Scripts/angular.min.js"></script>
          <script src="~/Scripts/app/google-analytics.js"></script>
     </head>
     <body>
@@ -48,12 +50,11 @@
         </div>
 
         @RenderBody()
-
+        
         <hr />
         <footer>
             <p>&copy; Montage Mtn Ski School @DateTime.Now.Year</p>
         </footer>
-
-        
+        @RenderSection("scripts", required: false)
     </body>
 </html>
