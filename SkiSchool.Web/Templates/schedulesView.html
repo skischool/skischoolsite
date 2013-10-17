@@ -1,0 +1,35 @@
+﻿<div class="container">
+    <div class="row">
+
+        <form class="span12">
+            <h2 class="well">Schedule Management</h2>
+
+            <div class="progress progress-striped active" data-ng-show="isLoading">
+                <div class="bar" style="width: 100%;"></div>
+            </div>
+
+            <table class="table table-striped" data-ng-show="!isLoading">
+                <thead>
+                    <th>Month</th>
+                    <th>Day</th>
+                    <th>Date</th>
+                    <th>Start</th>
+                    <th>End</th>
+                    <th>Shift Type</th>
+                    <th>Total</th>
+                </thead>
+                <tbody data-ng-repeat="s in schedules">
+                    <tr>
+                        <td>{{ s.Date | date: 'MMMM' }}</td>
+                        <td>{{ s.Date | date: 'EEEE' }}</td>
+                        <td>{{ s.Date | date: 'yyyy-MM-dd' }}</td>
+                        <td>{{ s.Start | date: 'shortTime' }}</td>
+                        <td>{{ s.End | date: 'shortTime' }}</td>
+                        <td>{{ s.ShiftTypeName }}</td>
+                        <td>{{ s.Count }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

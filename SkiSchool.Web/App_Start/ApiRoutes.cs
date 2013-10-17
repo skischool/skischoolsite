@@ -24,6 +24,14 @@ namespace SkiSchool.Web.App_Start
             }
         }
 
+        public static string AllSchedules
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["AllSchedulesRoute"];
+            }
+        }
+
         public static string UpdateScheduleWithEmployeeIdRoute
         {
             get

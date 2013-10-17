@@ -29,9 +29,21 @@ namespace SkiSchool.Web.Models
 
         public int PriorityId { get; set; }
 
+        public string PriorityName { get; set; }
+
+        public string PriorityDescription { get; set; }
+
         public int SeasonId { get; set; }
 
+        public string SeasonName { get; set; }
+
+        public string SeasonDescription { get; set; }
+
         public int ShiftTypeId { get; set; }
+
+        public string ShiftTypeName { get; set; }
+
+        public string ShiftTypeDescription { get; set; }
 
         public Priority Priority { get; set; }
 

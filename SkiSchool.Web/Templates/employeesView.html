@@ -1,0 +1,33 @@
+﻿<div class="container">
+    <div class="row">
+
+        <form class="span12">
+            <h2 class="well">Employee Management</h2>
+
+            <div class="progress progress-striped active" data-ng-show="isLoading">
+                <div class="bar" style="width: 100%;"></div>
+            </div>
+
+            <table class="table table-striped" data-ng-show="!isLoading">
+                <thead>
+                    <th>Roster Id</th>
+                    <th>Name</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Current</th>
+                    <th>Local</th>
+                </thead>
+                <tbody data-ng-repeat="e in employees">
+                    <tr>
+                        <td>{{ e.RosterId }}</td>
+                        <td>{{ e.Person.LastName }}, {{ e.Person.FirstName }} {{ e.Person.MiddleName }}</td>
+                        <td>{{ e.EmployeeTitle.Name }}</td>
+                        <td>{{ e.EmployeeType.Description }}</td>
+                        <td>{{ e.Current }}</td>
+                        <td>{{ e.IsLocal }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

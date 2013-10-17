@@ -20,6 +20,8 @@ namespace SkiSchool.Web.Controllers.Api
 
         private string _updateScheduleWithEmployeeId = ApiRoutes.UpdateScheduleWithEmployeeIdRoute;
 
+        private string _allSchedules = ApiRoutes.AllSchedules;
+
         // GET api/schedules
         public List<Schedule> GetEmployeeSchedules(int? employeeId)
         {
@@ -42,6 +44,40 @@ namespace SkiSchool.Web.Controllers.Api
                 return availableSchedules.OrderBy(s => s.Date).ToList();
             }
         }
+
+        // GET api/schedules
+        public List<Schedule> GetAllSchedules()
+        {
+            HttpStatusCode httpStatusCode;
+
+            var allSchedulesUri = new Uri(string.Format(_allSchedules, _clientToken));
+
+            var allSchedules = Invoke.Get<List<Schedule>>(allSchedulesUri, out httpStatusCode);
+
+            var groupedSchedules = from s in allSchedules
+                                    group s by new { s.Date, s.Start, s.ShiftTypeId } into grp
+                                    select new Schedule()
+                                    {
+                                        Id = grp.Max(t => t.Id),
+                                        Date = grp.FirstOrDefault().Date.AddHours(7),
+                                        Start = grp.FirstOrDefault().Start.AddHours(7),
+                                        End = grp.FirstOrDefault().End.AddHours(7),
+                                        ShiftTypeId = grp.FirstOrDefault().ShiftTypeId,
+                                        ShiftTypeName = grp.FirstOrDefault().ShiftType.Name,
+                                        ShiftTypeDescription = grp.FirstOrDefault().ShiftTypeDescription,
+                                        PriorityId = grp.FirstOrDefault().PriorityId,
+                                        SeasonName = grp.FirstOrDefault().SeasonName,
+                                        SeasonDescription = grp.FirstOrDefault().SeasonDescription,
+                                        SeasonId = grp.FirstOrDefault().SeasonId,
+                                        Count = grp.Count()
+                                    };
+
+            return groupedSchedules.OrderBy(s => s.Date)
+                                   .ThenBy(s => s.Start)
+                                   .ThenBy(s => s.ShiftTypeId)
+                                   .ToList();
+        }
+
 
         // GET api/schedules?
         public List<Schedule> GetAvailableSchedules(int shiftType, int employeeId, int? month)

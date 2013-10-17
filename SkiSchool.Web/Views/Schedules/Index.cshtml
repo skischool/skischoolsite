@@ -1,14 +1,9 @@
-﻿@section Scripts {
+﻿@{
+    ViewBag.InitModule = "schedulesIndex";
+}
+
+@section Scripts {
     <script src="~/Scripts/controllers/schedulesIndexController.js"></script>
 }
 <br /><br /><br />
-<div class="container" data-ng-controller="schedulesIndexController">
-    <div class="row">
-
-        <form class="span12">
-            <h2 class="well">Schedule Management</h2>
-            <span>{{ test }}</span>
-
-        </form>
-    </div>
-</div>
+<div data-ng-view=""></div>

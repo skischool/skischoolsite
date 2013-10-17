@@ -1,4 +1,16 @@
-﻿function employeesIndexController($scope, $http) {
+﻿var module = angular.module("employeesIndex", []);
+
+module.config(function ($routeProvider) {
+    $routeProvider.when('/', {
+        controller: 'employeesController',
+        templateUrl: '../../Templates/employeesView.html'
+    });
+
+    $routeProvider.otherwise({ redirectTo: '/' });
+});
+
+
+function employeesController($scope, $http) {
     $scope.employees = [];
     $scope.isLoading = true;
 
