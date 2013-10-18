@@ -9,7 +9,7 @@ module.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: '/' });
 });
 
-function schedulesController($scope, $http) {
+var schedulesController = ['$scope', '$http', function($scope, $http) {
     $scope.test = 'schedules test';
     $scope.schedules = [];
     $scope.isLoading = true;
@@ -26,4 +26,4 @@ function schedulesController($scope, $http) {
          .then(function () {
              $scope.isLoading = false;
          });
-};
+}];

@@ -10,7 +10,7 @@ module.config(function ($routeProvider) {
 });
 
 
-function employeesController($scope, $http) {
+var employeesController = ['$scope', '$http', function($scope, $http) {
     $scope.employees = [];
     $scope.isLoading = true;
 
@@ -26,4 +26,4 @@ function employeesController($scope, $http) {
          .then(function () {
              $scope.isLoading = false;
          });
-};
+}];

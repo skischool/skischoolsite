@@ -9,7 +9,7 @@ module.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: '/' });
 });
 
-function securityController($scope, $http) {
+var securityController = ['$scope', '$http', function($scope, $http) {
     $scope.security = [];
     $scope.isLoading = true;
 
@@ -25,4 +25,4 @@ function securityController($scope, $http) {
          .then(function () {
              $scope.isLoading = false;
          });
-};
+}];
