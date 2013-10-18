@@ -1,0 +1,29 @@
+﻿<div class="container">
+    <div class="row">
+
+        <form class="span12">
+            <h2 class="well">Security Management</h2>
+
+            <div class="progress progress-striped active" data-ng-show="isLoading">
+                <div class="bar" style="width: 100%;"></div>
+            </div>
+
+            <table class="table table-striped" data-ng-show="!isLoading">
+                <thead>
+                    <th>User</th>
+                    <th>Role</th>
+                    <th>Date Created</th>
+                    <th>Name</th>
+                </thead>
+                <tbody data-ng-repeat="s in security | orderBy:'Username'">
+                    <tr>
+                        <td>{{ s.Username }}</td>
+                        <td>{{ s.RoleName }}</td>
+                        <td>{{ s.CreateDate | date:'yyyy-MM-dd' }}</td>
+                        <td>{{ s.LastName }}, {{ s.FirstName }} {{ s.MiddleName }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>

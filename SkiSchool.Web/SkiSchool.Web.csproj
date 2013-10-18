@@ -198,6 +198,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\EmployeesController.cs" />
     <Compile Include="Controllers\Api\SchedulesController.cs" />
+    <Compile Include="Controllers\Api\SecurityController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -218,6 +219,7 @@
     <Compile Include="Models\EmployeeType.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\EmployeeTitle.cs" />
+    <Compile Include="Models\UserEmployeeInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -621,6 +623,7 @@
     <Content Include="Scripts\underscore.min.js" />
     <Content Include="Templates\employeesView.html" />
     <Content Include="Templates\schedulesView.html" />
+    <Content Include="Templates\securityView.html" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
