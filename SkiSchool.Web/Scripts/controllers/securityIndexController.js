@@ -9,20 +9,35 @@ module.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: '/' });
 });
 
-var securityController = ['$scope', '$http', function($scope, $http) {
-    $scope.security = [];
+var securityController = ['$scope', 'securityService', function ($scope, securityService) {
+    $scope.data = securityService;
     $scope.isLoading = true;
 
-    $http.get('../../api/security')
-         .then(function (result) {
-             // Success
-             angular.copy(result.data, $scope.security)
-         },
-         function () {
-             // Error
-             alert('error');
-         })
-         .then(function () {
-             $scope.isLoading = false;
-         });
+    if (securityService.isReady() == false) {
+        $scope.isLoading = true;
+        securityService.getSecurity()
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not load.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+              });
+    }
+
+    //$http.get('../../api/security')
+    //     .then(function (result) {
+    //         // Success
+    //         angular.copy(result.data, $scope.security)
+    //     },
+    //     function () {
+    //         // Error
+    //         alert('error');
+    //     })
+    //     .then(function () {
+    //         $scope.isLoading = false;
+    //     });
 }];

@@ -9,21 +9,22 @@ module.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: '/' });
 });
 
-var schedulesController = ['$scope', '$http', function($scope, $http) {
-    $scope.test = 'schedules test';
-    $scope.schedules = [];
+var schedulesController = ['$scope', 'scheduleService', function($scope, scheduleService) {
+    $scope.data = scheduleService;
     $scope.isLoading = true;
 
-    $http.get('../../api/schedules')
-         .then(function (result) {
-             // Success
-             angular.copy(result.data, $scope.schedules)
-         },
-         function () {
-             // Error
-             alert('error');
-         })
-         .then(function () {
-             $scope.isLoading = false;
-         });
+    if (scheduleService.isReady() == false) {
+        $scope.isLoading = true;
+        scheduleService.getSchedules()
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not load.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+              });
+    }
 }];

@@ -1,24 +1,10 @@
-﻿@*@section Scripts {
-    <script src="~/Scripts/controllers/securityIndexController.js"></script>
-}
-<br /><br /><br />
-<div class="container" data-ng-controller="securityIndexController">
-    <div class="row">
-
-        <form class="span12">
-            <h2 class="well">Security Management</h2>
-            <span>{{ test }}</span>
-
-        </form>
-    </div>
-</div>*@
-
-@{
+﻿@{
     ViewBag.InitModule = "securityIndex";
 }
 
 @section Scripts {
     <script src="~/Scripts/controllers/securityIndexController.js"></script>
+    <script src="~/Scripts/services/securityService.js"></script>
 }
 <br /><br /><br />
 <div data-ng-view=""></div>

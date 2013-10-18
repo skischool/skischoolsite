@@ -15,7 +15,7 @@
                     <th>Date Created</th>
                     <th>Name</th>
                 </thead>
-                <tbody data-ng-repeat="s in security | orderBy:'Username'">
+                <tbody data-ng-repeat="s in data.security | orderBy:'Username'">
                     <tr>
                         <td>{{ s.Username }}</td>
                         <td>{{ s.RoleName }}</td>

@@ -1,29 +1,32 @@
-﻿//module.factory('scheduleService', function ($http, $q) {
+﻿module.factory('scheduleService', function ($http, $q) {
 
-//    var _schedules = [];
-//    var _isInit = false;
-//    var _isReady = function () {
-//        return _isInit;
-//    }
+    var _schedules = [];
+    var _isInit = false;
+    var _isReady = function () {
+        return _isInit;
+    };
 
-//    var _getSchedules = function () {
-//        var deferred = $q.defer();
+    var _getSchedules = function () {
 
-//        $http.get('../../api/schedules')
-//             .then(function (result) {
-//                 // Success
-//                 angular.copy(result.data, _schedules);
-//                 _isInit = true;
-//                 deferred.resolve();
-//             },
-//             function () {
-//                 // Error
-//                 deferred.reject();
-//             });
-//    }
+        var deffered = $q.defer();
 
-//    return {
-//        schedules: _schedules,
-//        isReady: _isReady
-//    }
-//});
+        $http.get('../../api/schedules')
+               .then(function (result) {
+                   // success
+                   angular.copy(result.data, _schedules);
+                   _isInit = true;
+                   deffered.resolve();
+               }, function () {
+                   // error
+                   deffered.reject();
+               });
+
+        return deffered.promise;
+    };
+
+    return {
+        schedules: _schedules,
+        getSchedules: _getSchedules,
+        isReady: _isReady
+    };
+});

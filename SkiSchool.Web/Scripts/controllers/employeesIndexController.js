@@ -9,21 +9,22 @@ module.config(function ($routeProvider) {
     $routeProvider.otherwise({ redirectTo: '/' });
 });
 
+var employeesController = ['$scope', 'employeesService', function($scope, employeesService) {
+    $scope.data = employeesService;
+    $scope.isLoading = false;
 
-var employeesController = ['$scope', '$http', function($scope, $http) {
-    $scope.employees = [];
-    $scope.isLoading = true;
-
-    $http.get('../../api/employees')
-         .then(function (result) {
-             // Success
-             angular.copy(result.data, $scope.employees)
-         },
-         function () {
-             // Error
-             alert('error');
-         })
-         .then(function () {
-             $scope.isLoading = false;
-         });
+    if (employeesService.isReady() == false) {
+        $scope.isLoading = true;
+        employeesService.getEmployees()
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not load.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+              });
+    }
 }];
