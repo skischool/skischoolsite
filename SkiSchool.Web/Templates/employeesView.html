@@ -10,6 +10,7 @@
 
             <table class="table table-striped" data-ng-show="!isLoading">
                 <thead>
+                    <th>Action</th>
                     <th>Roster Id</th>
                     <th>Name</th>
                     <th>Title</th>
@@ -19,6 +20,11 @@
                 </thead>
                 <tbody data-ng-repeat="e in data.employees">
                     <tr>
+                        <td>
+                            <button data-ng-click="showDetails(e)">View</button>
+                            <button data-ng-click="editDetails(e)">Edit</button>
+                            <button data-ng-click="deleteDetails(e)">Delete</button>
+                        </td>
                         <td>{{ e.RosterId }}</td>
                         <td>{{ e.Person.LastName }}, {{ e.Person.FirstName }} {{ e.Person.MiddleName }}</td>
                         <td>{{ e.EmployeeTitle.Name }}</td>
@@ -29,5 +35,103 @@
                 </tbody>
             </table>
         </form>
+    </div>
+</div>
+
+<div id="viewEmployee" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3>Details</h3>
+    </div>
+    <div class="modal-body">
+
+            <label for="rosterId">Roster Id</label>
+            <input id="rosterId" readonly data-ng-model="selectedItem.RosterId" />
+
+            <label for="current">Current</label>
+            <input id="current" readonly data-ng-model="selectedItem.Current" />
+
+            <label for="local">Local</label>
+            <input id="local" readonly data-ng-model="selectedItem.IsLocal" />
+
+            <label for="type">Type</label>
+            <input id="type" readonly data-ng-model="selectedItem.EmployeeType.Description" />
+
+            <label for="title">Title</label>
+            <input id="title" readonly data-ng-model="selectedItem.EmployeeTitle.Description" />
+
+            <label for="lastname">LastName</label>
+            <input id="lastname" readonly data-ng-model="selectedItem.Person.LastName" />
+
+            <label for="firstname">FirstName</label>
+            <input id="firstname" readonly data-ng-model="selectedItem.Person.FirstName" />
+
+            <label for="local" data-ng-show="selectedItem.Person.MiddleName.length">MiddleName</label>
+            <input id="middlename" readonly data-ng-show="selectedItem.Person.MiddleName.length" data-ng-model="selectedItem.Person.MiddleName" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+
+<div id="editEmployee" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3>Edit</h3>
+    </div>
+    <div class="modal-body">
+
+            <label for="rosterId">Roster Id</label>
+            <input id="Text1" data-ng-model="selectedItem.RosterId" />
+
+            <label for="current">Current</label>
+            <input id="Text2" data-ng-model="selectedItem.Current" />
+
+            <label for="local">Local</label>
+            <input id="Text3" data-ng-model="selectedItem.IsLocal" />
+
+            <label for="type">Type</label>
+            <input id="Text4" data-ng-model="selectedItem.EmployeeType.Description" />
+
+            <label for="title">Title</label>
+            <input id="Text5" data-ng-model="selectedItem.EmployeeTitle.Description" />
+
+            <label for="lastname">LastName</label>
+            <input id="Text6" data-ng-model="selectedItem.Person.LastName" />
+
+            <label for="firstname">FirstName</label>
+            <input id="Text7" data-ng-model="selectedItem.Person.FirstName" />
+
+            <label for="local">MiddleName</label>
+            <input id="Text8" data-ng-model="selectedItem.Person.MiddleName" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Save</button>
+    </div>
+</div>
+
+<div id="deleteEmployee" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3>Delete</h3>
+    </div>
+    <div class="modal-body">
+
+            <label for="rosterId">Roster Id</label>
+            <input id="rosterId" readonly data-ng-model="selectedItem.RosterId" />
+
+            <label for="lastname">LastName</label>
+            <input id="lastname" readonly data-ng-model="selectedItem.Person.LastName" />
+
+            <label for="firstname">FirstName</label>
+            <input id="firstname" readonly data-ng-model="selectedItem.Person.FirstName" />
+
+            <label for="middlename" data-ng-show="selectedItem.Person.MiddleName.length">MiddleName</label>
+            <input id="middlename" readonly data-ng-show="selectedItem.Person.MiddleName.length" data-ng-model="selectedItem.Person.MiddleName" />
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Delete</button>
     </div>
 </div>

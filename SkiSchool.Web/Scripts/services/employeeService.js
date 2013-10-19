@@ -1,5 +1,7 @@
 ﻿module.factory('employeesService', function ($http, $q) {
 
+    'use strict';
+
     var _employees = [];
     var _isInit = false;
     var _isReady = function () {

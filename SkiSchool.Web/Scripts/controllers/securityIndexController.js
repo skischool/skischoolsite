@@ -27,17 +27,4 @@ var securityController = ['$scope', 'securityService', function ($scope, securit
                   $scope.isLoading = false;
               });
     }
-
-    //$http.get('../../api/security')
-    //     .then(function (result) {
-    //         // Success
-    //         angular.copy(result.data, $scope.security)
-    //     },
-    //     function () {
-    //         // Error
-    //         alert('error');
-    //     })
-    //     .then(function () {
-    //         $scope.isLoading = false;
-    //     });
 }];

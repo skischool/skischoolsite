@@ -301,6 +301,8 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\app.js" />
+    <Content Include="Scripts\controllers\deleteEmployeeController.js" />
+    <Content Include="Scripts\controllers\editEmployeeController.js" />
     <Content Include="Scripts\controllers\employeesIndexController.js" />
     <Content Include="Scripts\controllers\schedulesIndexController.js" />
     <Content Include="Scripts\controllers\securityIndexController.js" />
@@ -313,6 +315,7 @@
     <Content Include="Scripts\app\routes.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\controllers\viewEmployeeController.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -628,6 +631,7 @@
     <Content Include="Templates\employeesView.html" />
     <Content Include="Templates\schedulesView.html" />
     <Content Include="Templates\securityView.html" />
+    <Content Include="Templates\viewEmployee.html" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

@@ -1,5 +1,7 @@
 ﻿module.factory('securityService', function ($http, $q) {
 
+    'use strict';
+
     var _security = [];
     var _isInit = false;
     var _isReady = function () {

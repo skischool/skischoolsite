@@ -5,11 +5,66 @@
 @section Scripts {
 
     <script src="~/Scripts/controllers/employeesIndexController.js"></script>
+    <script src="~/Scripts/controllers/viewEmployeeController.js"></script>
     <script src="~/Scripts/services/employeeService.js"></script>
 }
 <br /><br /><br />
 <div data-ng-view=""></div>
 
+@*<!-- View Employee Modal -->
 
+<div data-ng-controller="viewEmployeeController" id="viewEmployeeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="viewEmployeeLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="viewModalLabel">Employee Info</h3>
+    </div>
+    <div class="modal-body">
+        
+        View View View
 
+        <div>
+            {{ test }}
+        </div>
+          
 
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>*@
+
+<!-- Edit Employee Modal -->
+
+<div id="editEmployeeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="editEmployeeLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="editModalLabel">Employee Info</h3>
+    </div>
+    <div class="modal-body">
+        
+        Edit Edit Edit
+          
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>
+
+<!-- Delete Employee Modal -->
+
+<div id="deleteEmployeeModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteEmployeeLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="deleteModalLabel">Employee Info</h3>
+    </div>
+    <div class="modal-body">
+        
+        Delete Delete Delete
+          
+
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+</div>

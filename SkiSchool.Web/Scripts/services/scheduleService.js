@@ -1,5 +1,7 @@
 ﻿module.factory('scheduleService', function ($http, $q) {
 
+    'use strict';
+
     var _schedules = [];
     var _isInit = false;
     var _isReady = function () {
