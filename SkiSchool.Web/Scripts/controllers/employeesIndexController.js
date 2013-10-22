@@ -55,6 +55,18 @@ var employeesController = ['$scope', 'employeesService', function($scope, employ
               .then(function () {
                   $scope.isLoading = false;
               });
+
+        employeesService.getGenders()
+                .then(function () {
+                    // success
+                },
+                function () {
+                    // error
+                    alert('could not load');
+                })
+                .then(function () {
+                    $scope.isLoading = false;
+                });
     }
 
     $scope.showDetails = function (item) {

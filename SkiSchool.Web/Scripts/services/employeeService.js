@@ -5,6 +5,7 @@
     var _employees = [];
     var _employeeTypes = [];
     var _employeeTitles = [];
+    var _genders = [];
     var _isInit = false;
     var _isReady = function () {
         return _isInit;
@@ -64,6 +65,24 @@
         return deffered.promise;
     };
 
+    var _getGenders = function () {
+
+        var deffered = $q.defer();
+
+        $http.get('../../api/genders')
+               .then(function (result) {
+                   // success
+                   angular.copy(result.data, _genders);
+                   _isInit = true;
+                   deffered.resolve();
+               }, function () {
+                   // error
+                   deffered.reject();
+               });
+
+        return deffered.promise;
+    };
+
     var _editEmployee = function (employee) {
         var deffered = $q.defer();
 
@@ -84,10 +103,12 @@
         employees: _employees,
         employeeTypes: _employeeTypes,
         employeeTitles: _employeeTitles,
+        genders: _genders,
         getEmployees: _getEmployees,
         editEmployee: _editEmployee,
         getEmployeeTitles: _getEmployeeTitles,
         getEmployeeTypes: _getEmployeeTypes,
+        getGenders: _getGenders,
         isReady: _isReady
     };
 });

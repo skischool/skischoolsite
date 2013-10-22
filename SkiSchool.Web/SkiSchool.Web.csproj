@@ -199,6 +199,7 @@
     <Compile Include="Controllers\Api\EmployeesController.cs" />
     <Compile Include="Controllers\Api\EmployeeTitlesController.cs" />
     <Compile Include="Controllers\Api\EmployeeTypesController.cs" />
+    <Compile Include="Controllers\Api\GendersController.cs" />
     <Compile Include="Controllers\Api\SchedulesController.cs" />
     <Compile Include="Controllers\Api\SecurityController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />

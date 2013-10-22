@@ -13,6 +13,7 @@
                     <th>Action</th>
                     <th>Roster Id</th>
                     <th>Name</th>
+                    <th>Gender</th>
                     <th>Title</th>
                     <th>Type</th>
                     <th>Current</th>
@@ -27,6 +28,7 @@
                         </td>
                         <td>{{ e.RosterId }}</td>
                         <td>{{ e.Person.LastName }}, {{ e.Person.FirstName }} {{ e.Person.MiddleName }}</td>
+                        <td>{{ e.Person.Gender.Description }}</td>
                         <td>{{ e.EmployeeTitle.Name }}</td>
                         <td>{{ e.EmployeeType.Description }}</td>
                         <td>{{ e.Current }}</td>
@@ -84,6 +86,11 @@
             <span class="add-on">Current</span>
             <input id="middleName" readonly data-ng-model="selectedItem.Person.MiddleName" />
         </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Gender</span>
+            <input id="gender" readonly data-ng-model="selectedItem.Person.Gender.Description" />
+        </div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -97,55 +104,59 @@
     </div>
     <div class="modal-body">
 
-        <div class="input-prepend">
-            <span class="add-on">Roster Id</span>
-            <input id="rosterId" data-ng-model="selectedItem.RosterId" />
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Current</span>
+                <div class="input-prepend">
+                    <span class="add-on">Roster Id</span>
+                    <input id="Text2" data-ng-model="selectedItem.RosterId" />
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on">Current</span>
+                    <select id="Select1" class="controls">
+                        <option value="1">true</option>
+                        <option value="2">false</option>
+                    </select>
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on">Local</span>
+                    <select id="Select2" class="controls">
+                        <option value="1">true</option>
+                        <option value="2">false</option>
+                    </select>
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on">Type</span>
+                    <select id="employeeType" data-ng-model="selectedItem.EmployeeType.Id" data-ng-options="t.Id as t.Description for t in data.employeeTypes"></select>
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on">Title</span>
+                    <select id="employeeTitle" data-ng-model="selectedItem.EmployeeTitle.Id" data-ng-options="t.Id as t.Description for t in data.employeeTitles"></select>
+                </div>
+                
+                <hr />
 
-            <select id="current" class="controls">
-                <option value="1">true</option>
-                <option value="2">false</option>
-            </select>
-
-            <!--<input id="current" data-ng-model="selectedItem.Current" />-->
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Local</span>
-            <!--<input id="isLocal" data-ng-model="selectedItem.IsLocal" />-->
-            <select id="isLocal" class="controls">
-                <option value="1">true</option>
-                <option value="2">false</option>
-            </select>
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Type</span>
-            <select id="employeeType" data-ng-model="selectedItem.EmployeeType.Id" data-ng-options="t.Id as t.Description for t in data.employeeTypes"></select>
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Title</span>
-            <select id="employeeTitle" data-ng-model="selectedItem.EmployeeTitle.Id" data-ng-options="t.Id as t.Description for t in data.employeeTitles"></select>
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Last Name</span>
-            <input id="lastName" data-ng-model="selectedItem.Person.LastName" />
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">First Name</span>
-            <input id="firstName" data-ng-model="selectedItem.Person.FirstName" />
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Middle Name</span>
-            <input id="middleName" data-ng-model="selectedItem.Person.MiddleName" />
-        </div>
+                <div class="input-prepend">
+                    <span class="add-on">Last Name</span>
+                    <input id="Text1" data-ng-model="selectedItem.Person.LastName" />
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on">First Name</span>
+                    <input id="Text3" data-ng-model="selectedItem.Person.FirstName" />
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on">Middle Name</span>
+                    <input id="Text4" data-ng-model="selectedItem.Person.MiddleName" />
+                </div>
+                <br />
+                <div class="input-prepend">
+                    <span class="add-on">Type</span>
+                    <select id="Select3" data-ng-model="selectedItem.Person.Gender.Id" 
+                                        data-ng-options="t.Id as t.Description for t in data.genders"></select>
+                </div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>

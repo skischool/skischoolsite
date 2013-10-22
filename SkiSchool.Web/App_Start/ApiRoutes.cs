@@ -104,5 +104,13 @@ namespace SkiSchool.Web.App_Start
                 return ConfigurationManager.AppSettings["UpdateEmployeeUrl"];
             }
         }
+
+        public static string Genders
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["GendersUrl"];
+            }
+        }
     }
 }
