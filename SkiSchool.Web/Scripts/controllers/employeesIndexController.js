@@ -31,6 +31,30 @@ var employeesController = ['$scope', 'employeesService', function($scope, employ
               .then(function () {
                   $scope.isLoading = false;
               });
+
+        employeesService.getEmployeeTitles()
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not load.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+              });
+
+        employeesService.getEmployeeTypes()
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not load.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+              });
     }
 
     $scope.showDetails = function (item) {
@@ -46,5 +70,20 @@ var employeesController = ['$scope', 'employeesService', function($scope, employ
     $scope.deleteDetails = function (item) {
         $scope.selectedItem = item;
         $('#deleteEmployee').modal({});
+    }
+
+    $scope.editEmployee = function (item) {
+        $scope.isLoading = false;
+        employeesService.editEmployee(item)
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not save.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+              });
     }
 }];

@@ -65,6 +65,22 @@ namespace SkiSchool.Web.App_Start
             }
         }
 
+        public static string EmployeeTypes
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["EmployeeTypesUrl"];
+            }
+        }
+
+        public static string EmployeeTitles
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["EmployeeTitlesUrl"];
+            }
+        }
+
         public static string SecurityApiUrl
         {
             get
@@ -81,5 +97,12 @@ namespace SkiSchool.Web.App_Start
             }
         }
 
+        public static string UpdateEmployeeUrl
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["UpdateEmployeeUrl"];
+            }
+        }
     }
 }

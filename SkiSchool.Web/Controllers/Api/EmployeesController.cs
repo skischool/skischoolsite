@@ -20,6 +20,8 @@ namespace SkiSchool.Web.Controllers.Api
 
         private string _employeesUrl = ApiRoutes.Employees;
 
+        private string _employeeUpdateUrl = ApiRoutes.UpdateEmployeeUrl;
+
         // GET api/employees
         public List<Employee> GetAll()
         {
@@ -30,6 +32,21 @@ namespace SkiSchool.Web.Controllers.Api
             var employees = Invoke.Get<List<Employee>>(employeesUri, out httpStatusCode);
 
             return employees.OrderBy(e => e.Person.LastName).ToList();
+        }
+
+        // PUT api/employees?{id}
+        [HttpPut]
+        public Employee Put([FromUri]int id, [FromBody]Employee employee)
+        {
+            HttpStatusCode httpStatusCode;
+
+            var employeeUpdateUrl = string.Format(_employeeUpdateUrl, id, _clientToken);
+
+            var employeeUpdateUri = new Uri(employeeUpdateUrl);
+
+            var updatedEmployee = Invoke.Put<Employee>(employeeUpdateUri, employee, out httpStatusCode);
+
+            return updatedEmployee;
         }
 
         // GET api/employees/5

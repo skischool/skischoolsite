@@ -197,6 +197,8 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\EmployeesController.cs" />
+    <Compile Include="Controllers\Api\EmployeeTitlesController.cs" />
+    <Compile Include="Controllers\Api\EmployeeTypesController.cs" />
     <Compile Include="Controllers\Api\SchedulesController.cs" />
     <Compile Include="Controllers\Api\SecurityController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -284,6 +286,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <None Include="Properties\PublishProfiles\FileSystem.pubxml" />
+    <Content Include="Images\snow.jpg" />
     <Content Include="Scripts\angular-bootstrap-prettify.js" />
     <Content Include="Scripts\angular-bootstrap-prettify.min.js" />
     <Content Include="Scripts\angular-bootstrap.js" />
