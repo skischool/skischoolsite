@@ -11,7 +11,9 @@ namespace SkiSchool.Web.Models
 
         public string FirstName { get; set; }
 
-        public int GenderId { get; set; }
+        // public int GenderId { get; set; }
+
+        public Gender Gender { get; set; }
 
         public int Id { get; set; }
 

@@ -212,6 +212,7 @@
     </Compile>
     <Compile Include="Helpers\Invoke.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ShiftType.cs" />
     <Compile Include="Models\Season.cs" />

@@ -23,6 +23,8 @@
     self.middleName = ko.observable();
     self.dateOfBirth = ko.observable();
     self.genderId = ko.observable();
+    self.genderName = ko.observable();
+    self.genderDescription = ko.observable();
     self.employeeTitleDesc = ko.observable();
     self.employeeTitleName = ko.observable();
     self.employeeTitleId = ko.observable();
@@ -186,7 +188,9 @@
             self.lastName(data.Person.LastName);
             self.middleName(data.Person.MiddleName);
             self.dateOfBirth(moment(data.Person.DateOfBirth).format('YYYY-MM-DD'));
-            self.genderId(data.Person.GenderId);
+            self.genderId(data.Person.Gender.Id);
+            self.genderName(data.Person.Gender.Name);
+            self.genderDescription(data.Person.Gender.Description);
             self.employeeTitleDesc(data.EmployeeTitle.Description);
             self.employeeTitleName(data.EmployeeTitle.Name);
             self.employeeTitleId(data.EmployeeTitle.Id);
