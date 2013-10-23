@@ -49,47 +49,49 @@
 
         <div class="input-prepend">
             <span class="add-on">Roster Id</span>
-            <input id="rosterId" readonly data-ng-model="selectedItem.RosterId" />
+            <input readonly data-ng-model="selectedItem.RosterId" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Current</span>
-            <input id="current" readonly data-ng-model="selectedItem.Current" />
+            <input readonly data-ng-model="selectedItem.Current" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Local</span>
-            <input id="isLocal" readonly data-ng-model="selectedItem.IsLocal" />
+            <input readonly data-ng-model="selectedItem.IsLocal" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Type</span>
-            <input id="typeDescription" readonly data-ng-model="selectedItem.EmployeeType.Description" />
+            <input readonly data-ng-model="selectedItem.EmployeeType.Description" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Title</span>
-            <input id="titleDescription" readonly data-ng-model="selectedItem.EmployeeTitle.Description" />
+            <input readonly data-ng-model="selectedItem.EmployeeTitle.Description" />
+        </div>
+        
+        <hr />
+
+        <div class="input-prepend">
+            <span class="add-on">Last Name</span>
+            <input readonly data-ng-model="selectedItem.Person.LastName" />
         </div>
         <br />
         <div class="input-prepend">
-            <span class="add-on">Current</span>
-            <input id="lastName" readonly data-ng-model="selectedItem.Person.LastName" />
+            <span class="add-on">First Name</span>
+            <input readonly data-ng-model="selectedItem.Person.FirstName" />
         </div>
         <br />
         <div class="input-prepend">
-            <span class="add-on">Current</span>
-            <input id="firstName" readonly data-ng-model="selectedItem.Person.FirstName" />
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Current</span>
-            <input id="middleName" readonly data-ng-model="selectedItem.Person.MiddleName" />
+            <span class="add-on">Middle Name</span>
+            <input readonly data-ng-model="selectedItem.Person.MiddleName" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Gender</span>
-            <input id="gender" readonly data-ng-model="selectedItem.Person.Gender.Description" />
+            <input readonly data-ng-model="selectedItem.Person.Gender.Description" />
         </div>
     </div>
     <div class="modal-footer">
@@ -106,25 +108,10 @@
 
                 <div class="input-prepend">
                     <span class="add-on">Roster Id</span>
-                    <input id="Text2" data-ng-model="selectedItem.RosterId" />
+                    <input id="rosterId" data-ng-model="selectedItem.RosterId" />
                 </div>
                 <br />
-                <div class="input-prepend">
-                    <span class="add-on">Current</span>
-                    <select id="Select1" class="controls">
-                        <option value="1">true</option>
-                        <option value="2">false</option>
-                    </select>
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Local</span>
-                    <select id="Select2" class="controls">
-                        <option value="1">true</option>
-                        <option value="2">false</option>
-                    </select>
-                </div>
-                <br />
+                
                 <div class="input-prepend">
                     <span class="add-on">Type</span>
                     <select id="employeeType" data-ng-model="selectedItem.EmployeeType.Id" data-ng-options="t.Id as t.Description for t in data.employeeTypes"></select>
@@ -134,27 +121,39 @@
                     <span class="add-on">Title</span>
                     <select id="employeeTitle" data-ng-model="selectedItem.EmployeeTitle.Id" data-ng-options="t.Id as t.Description for t in data.employeeTitles"></select>
                 </div>
-                
+                <br />
+                <div>
+                    <label class="checkbox">
+                            <input id="current" type="checkbox" data-ng-model="selectedItem.Current" /> Current
+                    </label>
+
+                </div>
+                <div>
+                    <label class="checkbox">
+                        <input id="isLocal" type="checkbox" data-ng-model="selectedItem.IsLocal" /> Local
+                    </label>
+                </div>   
+
                 <hr />
 
                 <div class="input-prepend">
                     <span class="add-on">Last Name</span>
-                    <input id="Text1" data-ng-model="selectedItem.Person.LastName" />
+                    <input id="lastName" data-ng-model="selectedItem.Person.LastName" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">First Name</span>
-                    <input id="Text3" data-ng-model="selectedItem.Person.FirstName" />
+                    <input id="firstName" data-ng-model="selectedItem.Person.FirstName" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">Middle Name</span>
-                    <input id="Text4" data-ng-model="selectedItem.Person.MiddleName" />
+                    <input id="middleName" data-ng-model="selectedItem.Person.MiddleName" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">Type</span>
-                    <select id="Select3" data-ng-model="selectedItem.Person.Gender.Id" 
+                    <select id="genderId" data-ng-model="selectedItem.Person.Gender.Id" 
                                         data-ng-options="t.Id as t.Description for t in data.genders"></select>
                 </div>
     </div>
@@ -173,22 +172,22 @@
 
         <div class="input-prepend">
             <span class="add-on">Roster Id</span>
-            <input id="Text1" readonly data-ng-model="selectedItem.RosterId" />
+            <input readonly data-ng-model="selectedItem.RosterId" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Last Name</span>
-            <input id="lastName" readonly data-ng-model="selectedItem.Person.LastName" />
+            <input readonly data-ng-model="selectedItem.Person.LastName" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">First Name</span>
-            <input id="firstname" readonly data-ng-model="selectedItem.Person.FirstName" />
+            <input readonly data-ng-model="selectedItem.Person.FirstName" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Middle Name</span>
-            <input id="middleName" readonly data-ng-show="selectedItem.Person.MiddleName.length" data-ng-model="selectedItem.Person.MiddleName" />
+            <input readonly data-ng-show="selectedItem.Person.MiddleName.length" data-ng-model="selectedItem.Person.MiddleName" />
         </div>
     </div>
     <div class="modal-footer">

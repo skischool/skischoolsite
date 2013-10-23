@@ -6,11 +6,6 @@ module.config(function ($routeProvider) {
         templateUrl: '../../Templates/employeesView.html'
     });
 
-    //$routeProvider.when('/newmessage', {
-    //    controller: 'viewEmployeeController',
-    //    templateUrl: '../../Templates/employeesView.html'
-    //});
-
     $routeProvider.otherwise({ redirectTo: '/' });
 });
 
@@ -86,6 +81,7 @@ var employeesController = ['$scope', 'employeesService', function($scope, employ
 
     $scope.editEmployee = function (item) {
         $scope.isLoading = false;
+
         employeesService.editEmployee(item)
               .then(function () {
                   // success
@@ -96,6 +92,8 @@ var employeesController = ['$scope', 'employeesService', function($scope, employ
               })
               .then(function () {
                   $scope.isLoading = false;
+
+                  employeesService.getEmployees();
               });
     }
 }];
