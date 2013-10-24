@@ -15,6 +15,8 @@ namespace SkiSchool.Web.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.EmployeeId = HttpContext.Session["employeeId"].ToString();
+
             return View();
         }
 

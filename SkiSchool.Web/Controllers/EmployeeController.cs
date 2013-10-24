@@ -24,6 +24,7 @@ namespace SkiSchool.Web.Controllers
         [Authorize(Roles = "Admin,Manager,User")]
         public ActionResult Details(int id)
         {
+            HttpContext.Session["employeeId"] = id.ToString();
 
             return View();
         }

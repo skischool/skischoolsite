@@ -45,6 +45,8 @@ namespace SkiSchool.Web.Controllers
 
                     var employee = Invoke.Get<Employee>(employeeWithLoginIdUri, out httpStatusCode);
 
+                    ViewBag.EmployeeId = employee.Id;
+
                     returnUrl = string.Format("{0}/Details/{1}", returnUrl, employee.Id.ToString());
 
                     return Json(new { success = true, redirect = returnUrl });
