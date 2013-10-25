@@ -27,4 +27,33 @@ var securityController = ['$scope', 'securityService', function ($scope, securit
                   $scope.isLoading = false;
               });
     }
+
+    $scope.showDetails = function (item) {
+        $scope.selectedItem = item;
+        $('#viewSecurity').modal({});
+    }
+
+    $scope.editDetails = function (item) {
+        $scope.selectedItem = item;
+        $('#editSecurity').modal({});
+    }
+
+    $scope.editSecurity = function (item) {
+        $scope.isLoading = false;
+
+        securityService.editSecurity(item)
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not save.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+
+                  securityService.getSecurity();
+              });
+    }
+
 }];
