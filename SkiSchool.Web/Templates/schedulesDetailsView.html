@@ -16,22 +16,20 @@
                     <th>Date</th>
                     <th>Start</th>
                     <th>End</th>
-                    <th>Type</th>
-                    <th>Total</th>
+                    <th>Shift Type</th>
                 </thead>
-                <tbody data-ng-repeat="s in data.aggregateSchedules">
+                <tbody data-ng-repeat="s in data.schedules">
                     <tr>
                         <td>
                             <button class="btn" data-ng-click="showDetails(s)">View</button>
-                            <button class="btn" data-ng-click="editDetails(s)">Edit</button>
+                            <button class="btn" data-ng-click="deleteDetails(s)">Delete</button>
                         </td>
                         <td>{{ s.Date | date: 'MMMM' }}</td>
                         <td>{{ s.Date | date: 'EEEE' }}</td>
                         <td>{{ s.Date | date: 'yyyy-MM-dd' }}</td>
                         <td>{{ s.Start | date: 'shortTime' }}</td>
                         <td>{{ s.End | date: 'shortTime' }}</td>
-                        <td>{{ s.ShiftTypeName }}</td>
-                        <td>{{ s.Count }}</td>
+                        <td>{{ s.ShiftType.Description }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -68,12 +66,7 @@
         <br />
         <div class="input-prepend">
             <span class="add-on">Type</span>
-            <input readonly value="{{ selectedItem.ShiftTypeName }}" />
-        </div>
-        <br />
-        <div class="input-prepend">
-            <span class="add-on">Total</span>
-            <input readonly value="{{ selectedItem.Count }}" />
+            <input readonly value="{{ selectedItem.ShiftType.Description }}" />
         </div>
     </div>
     <div class="modal-footer">
@@ -81,45 +74,40 @@
     </div>
 </div>
 
-<div id="editSchedule" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
+<div id="deleteSchedule" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h3>Edit</h3>
+        <h3>Delete</h3>
     </div>
     <div class="modal-body">
 
-                <div class="input-prepend">
-                    <span class="add-on">Month</span>
-                    <input readonly value="{{ selectedItem.Date | date: 'MMMM' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Date</span>
-                    <input readonly value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Start</span>
-                    <input readonly value="{{ selectedItem.Start | date: 'shortTime' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">End</span>
-                    <input readonly value="{{ selectedItem.End | date: 'shortTime' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Type</span>
-                    <input readonly value="{{ selectedItem.ShiftTypeName }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Total</span>
-                    <input id="count" data-ng-model="selectedItem.Count" />
-                </div>
+         <div class="input-prepend">
+            <span class="add-on">Month</span>
+            <input readonly value="{{ selectedItem.Date | date: 'MMMM' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Date</span>
+            <input readonly value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Start</span>
+            <input readonly value="{{ selectedItem.Start | date: 'shortTime' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">End</span>
+            <input readonly value="{{ selectedItem.End | date: 'shortTime' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Type</span>
+            <input readonly value="{{ selectedItem.ShiftType.Description }}" />
+        </div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" disabled data-ng-click="editSchedule(selectedItem)">Save</button>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" disabled data-ng-click="deleteSchedule(selectedItem)">Delete</button>
     </div>
 </div>

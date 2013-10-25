@@ -309,6 +309,7 @@
     <Content Include="Scripts\controllers\deleteEmployeeController.js" />
     <Content Include="Scripts\controllers\editEmployeeController.js" />
     <Content Include="Scripts\controllers\employeesIndexController.js" />
+    <Content Include="Scripts\controllers\schedulesDetailsController.js" />
     <Content Include="Scripts\controllers\schedulesIndexController.js" />
     <Content Include="Scripts\controllers\securityIndexController.js" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
@@ -634,9 +635,9 @@
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
     <Content Include="Templates\employeesView.html" />
+    <Content Include="Templates\schedulesDetailsView.html" />
     <Content Include="Templates\schedulesView.html" />
     <Content Include="Templates\securityView.html" />
-    <Content Include="Templates\viewEmployee.html" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -682,6 +683,7 @@
     <Content Include="Views\Schedules\Index.cshtml" />
     <Content Include="Views\Security\Index.cshtml" />
     <Content Include="Scripts\underscore.min.map" />
+    <Content Include="Views\Schedules\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

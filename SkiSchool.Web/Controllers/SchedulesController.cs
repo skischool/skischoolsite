@@ -20,5 +20,15 @@ namespace SkiSchool.Web.Controllers
             return View();
         }
 
+        //
+        // GET: /Schedules/Details
+
+        public ActionResult Details()
+        {
+            ViewBag.EmployeeId = HttpContext.Session["employeeId"].ToString();
+
+            return View();
+        }
+
     }
 }

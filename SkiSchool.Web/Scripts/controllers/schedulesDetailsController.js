@@ -1,21 +1,21 @@
-﻿var module = angular.module('schedulesIndex', []);
+﻿var module = angular.module('schedulesDetails', []);
 
 module.config(function ($routeProvider) {
     $routeProvider.when('/', {
-        controller: 'schedulesController',
-        templateUrl: '../../Templates/schedulesView.html'
+        controller: 'schedulesDetailsController',
+        templateUrl: '../../Templates/schedulesDetailsView.html'
     });
 
     $routeProvider.otherwise({ redirectTo: '/' });
 });
 
-var schedulesController = ['$scope', 'scheduleService', function($scope, scheduleService) {
+var schedulesDetailsController = ['$scope', 'scheduleService', function ($scope, scheduleService) {
     $scope.data = scheduleService;
     $scope.isLoading = true;
 
     if (scheduleService.isReady() == false) {
         $scope.isLoading = true;
-        scheduleService.getSchedulesAggregate()
+        scheduleService.getSchedules()
               .then(function () {
                   // success
               },
@@ -28,18 +28,17 @@ var schedulesController = ['$scope', 'scheduleService', function($scope, schedul
               });
     }
 
-    
     $scope.showDetails = function (item) {
         $scope.selectedItem = item;
         $('#viewSchedule').modal({});
     }
 
-    $scope.editDetails = function (item) {
+    $scope.deleteDetails = function (item) {
         $scope.selectedItem = item;
-        $('#editSchedule').modal({});
+        $('#deleteSchedule').modal({});
     }
 
-    $scope.editSchedule = function (item) {
+    $scope.deleteSchedule = function (item) {
         $scope.isLoading = false;
 
         scheduleService.editSchedule(item)
@@ -56,4 +55,5 @@ var schedulesController = ['$scope', 'scheduleService', function($scope, schedul
                   scheduleService.getSchedules();
               });
     }
+
 }];
