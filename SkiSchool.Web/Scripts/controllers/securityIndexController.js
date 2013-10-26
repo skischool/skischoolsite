@@ -12,6 +12,7 @@ module.config(function ($routeProvider) {
 var securityController = ['$scope', 'securityService', function ($scope, securityService) {
     $scope.data = securityService;
     $scope.isLoading = true;
+    $scope.sortorder = 'LastName';
 
     if (securityService.isReady() == false) {
         $scope.isLoading = true;

@@ -12,6 +12,7 @@ module.config(function ($routeProvider) {
 var schedulesDetailsController = ['$scope', 'scheduleService', function ($scope, scheduleService) {
     $scope.data = scheduleService;
     $scope.isLoading = true;
+    $scope.sortorder = 'Date';
 
     if (scheduleService.isReady() == false) {
         $scope.isLoading = true;

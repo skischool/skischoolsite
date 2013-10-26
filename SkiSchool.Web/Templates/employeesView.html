@@ -8,6 +8,29 @@
                 <div class="bar" style="width: 100%;"></div>
             </div>
 
+            <div class="input-prepend" data-ng-show="!isLoading">
+                <span class="add-on">
+                    Order By
+                </span>
+                <select data-ng-model="sortorder" class="input-medium">
+                    <option selected value="Person.LastName">Last Name</option>
+                    <option value="Person.FirstName">First Name</option>
+                    <option value="RosterId">RosterId</option>
+                    <option value="Person.Gender.Description">Gender</option>
+                    <option value="EmployeeTitle.Name">Title</option>
+                    <option value="EmployeeType.Description">Type</option>
+                    <option value="Current">Current</option>
+                    <option value="IsLocal">Local</option>
+                </select>
+            </div>
+
+            <div class="input-prepend" data-ng-show="!isLoading">
+                <span class="add-on">
+                    Filter
+                </span>
+                <input type="text" data-ng-model="query" class="input-medium" />
+            </div>
+
             <table class="table table-striped" data-ng-show="!isLoading">
                 <thead>
                     <th>Action</th>
@@ -19,7 +42,7 @@
                     <th>Current</th>
                     <th>Local</th>
                 </thead>
-                <tbody data-ng-repeat="e in data.employees">
+                <tbody data-ng-repeat="e in data.employees | orderBy:sortorder | filter:query">
                     <tr>
                         <td>
                             <button class="btn" data-ng-click="showDetails(e)">View</button>

@@ -8,6 +8,26 @@
                 <div class="bar" style="width: 100%;"></div>
             </div>
 
+            <div class="input-prepend" data-ng-show="!isLoading">
+                <span class="add-on">
+                    Order By
+                </span>
+                <select data-ng-model="sortorder" class="input-medium">
+                    <option selected value="Date">Date</option>
+                    <option value="Start">Start</option>
+                    <option value="End">End</option>
+                    <option value="ShiftTypeName">Type</option>
+                    <option value="Count">Count</option>
+                </select>
+            </div>
+
+            <div class="input-prepend" data-ng-show="!isLoading">
+                <span class="add-on">
+                    Filter
+                </span>
+                <input type="text" data-ng-model="query" class="input-medium" />
+            </div>
+
             <table class="table table-striped" data-ng-show="!isLoading">
                 <thead>
                     <th>Action</th>
@@ -19,7 +39,7 @@
                     <th>Type</th>
                     <th>Total</th>
                 </thead>
-                <tbody data-ng-repeat="s in data.aggregateSchedules">
+                <tbody data-ng-repeat="s in data.aggregateSchedules | orderBy:sortorder | filter:query">
                     <tr>
                         <td>
                             <button class="btn" data-ng-click="showDetails(s)">View</button>
