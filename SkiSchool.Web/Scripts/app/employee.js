@@ -74,18 +74,27 @@
                 return item.id === d.Id;
             });
 
-            //self.availableSchedules.remove(function (item) {
-            //    return item.date === d.date;
-            //});
+            self.availableSchedules.remove(function (item) {
+                return item.scheduleDate === d.Date;
+            });
 
             self.schedules.push({
                 id: d.Id,
+                scheduleDate: d.Date,
                 date: moment(d.Date).format('dddd, MMMM Do YYYY'),
                 seasonId: d.SeasonId,
                 employeeId: d.EmployeeId,
                 start: moment(d.Start).format('h:mm a'),
                 end: moment(d.End).format('h:mm a')
             });
+
+            //self.schedules.sort(function (schedule1, schedule2) {
+            //    return schedule2.scheduleDate - schedule1.scheduleDate;
+            //});
+
+            self.schedules.sort(function (left, right) {
+                return left.scheduleDate == right.scheduleDate ? 0 : (left.scheduleDate < right.scheduleDate ? -1 : 1)
+            })
         });
     };
     self.removeScheduleItem = function (data, event) {
@@ -111,6 +120,7 @@
             self.availableSchedules.push({
                 id: d.Id,
                 seasonId: d.SeasonId,
+                scheduleDate: d.Date,
                 date: moment(d.Date).format('dddd, MMMM Do YYYY'),
                 start: moment(d.Start).format('h:mm a'),
                 end: moment(d.End).format('h:mm a')
@@ -138,6 +148,7 @@
                 self.availableSchedules.push({
                     id: val.Id,
                     seasonId: val.SeasonId,
+                    scheduleDate: val.Date,
                     date: moment(val.Date).format('dddd, MMMM Do YYYY'),
                     start: moment(val.Start).format('h:mm a'),
                     end: moment(val.End).format('h:mm a'),
@@ -161,6 +172,7 @@
                 self.schedules.push({
                     id: val.Id,
                     seasonId: val.SeasonId,
+                    scheduleDate: val.Date,
                     date: moment(val.Date).format('dddd, MMMM Do YYYY'),
                     start: moment(val.Start).format('h:mm a'),
                     end: moment(val.End).format('h:mm a'),
@@ -211,6 +223,7 @@
                 self.availableSchedules.push({
                     id: val.Id,
                     seasonId: val.SeasonId,
+                    scheduleDate: val.Date,
                     date: moment(val.Date).format('dddd, MMMM Do YYYY'),
                     start: moment(val.Start).format('h:mm a'),
                     end: moment(val.End).format('h:mm a'),
