@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using SkiSchool.Web.App_Start;
 using SkiSchool.Web.Helpers;
@@ -20,7 +21,11 @@ namespace SkiSchool.Web.Controllers.Api
 
         private string _updateScheduleWithEmployeeId = ApiRoutes.UpdateScheduleWithEmployeeIdRoute;
 
+        private string _postSchedule = ApiRoutes.PostSchedule;
+
         private string _allSchedules = ApiRoutes.AllSchedules;
+
+        private string _scheduleTimeUrl = ApiRoutes.ScheduleTime;
 
         // GET api/schedules
         public List<Schedule> GetEmployeeSchedules(int? employeeId)
@@ -99,7 +104,6 @@ namespace SkiSchool.Web.Controllers.Api
             }
         }
 
-
         // GET api/schedules?
         public List<Schedule> GetAvailableSchedules(int shiftType, int employeeId, int? month)
         {
@@ -134,6 +138,52 @@ namespace SkiSchool.Web.Controllers.Api
             return month != null ? 
                 groupedAvailableSchedulesByType.Where(s => s.Date.Month == month).OrderBy(s => s.Date).ToList() : 
                 groupedAvailableSchedulesByType.OrderBy(s => s.Date).ToList();
+        }
+
+        // POST api/schedules
+        public Schedule Post([FromBody]Schedule schedule)
+        {
+            HttpStatusCode httpStatusCode;
+
+            var scheduleTimeUri = new Uri(string.Format(_scheduleTimeUrl, schedule.ScheduleTimeId, _clientToken));
+
+            var scheduleTime = Invoke.Get<ScheduleTime>(scheduleTimeUri, out httpStatusCode);
+
+            var scheduleStart = scheduleTime.Start;
+
+            var scheduleEnd = scheduleTime.End;
+
+            var scheduleCount = schedule.Count;
+
+            var newSchedule = new Schedule()
+            {
+                ClientId = 0,
+                Date = new DateTime(schedule.Date.Year, schedule.Date.Month, schedule.Date.Day),
+                Start = new DateTime(schedule.Date.Year, schedule.Date.Month, schedule.Date.Day, scheduleStart.Hour, scheduleStart.Minute, scheduleStart.Second),
+                End = new DateTime(schedule.Date.Year, schedule.Date.Month, schedule.Date.Day, scheduleEnd.Hour, scheduleEnd.Minute, scheduleEnd.Second),
+                ShiftType = new ShiftType() { Id = schedule.ShiftTypeId, Name = "Test Name", Description = "Test Description" },
+                Season = new Season() { Id = 4, Name = "Test Name", Description = "Test Description", Start = DateTime.Now, End = DateTime.Now.AddDays(100) },
+                SeasonId = 4,
+                PriorityId = 4,
+                Priority = new Priority() { Id = 4, Name = "Test Name", Description = "Test Description" },
+                CanAdd = true,
+                CanRemove = true,
+                CanUpdate = true,
+                Assigned = false
+            };
+
+            var postScheduleUri = new Uri(string.Format(_postSchedule, _clientToken));
+
+            var postedSchedule = new Schedule(); 
+
+            Parallel.For(0, scheduleCount, i =>
+                {
+                    postedSchedule = Invoke.Post<Schedule>(postScheduleUri, newSchedule, out httpStatusCode);
+                });
+
+            postedSchedule.Count = scheduleCount;
+
+            return postedSchedule;
         }
 
         // PUT api/schedules?id={scheduleId}

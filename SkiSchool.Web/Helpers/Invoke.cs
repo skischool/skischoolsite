@@ -60,6 +60,26 @@ namespace SkiSchool.Web.Helpers
         //    return t;
         //}
 
+        public static T Post<T>(Uri uri, dynamic formBody, out HttpStatusCode httpStatusCode)
+        {
+            T t;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = uri;
+
+                var content = new StringContent(JsonConvert.SerializeObject(formBody), Encoding.UTF8, "application/json");
+
+                var httpResponseMessage = client.PostAsync(uri, content).Result;
+
+                t = httpResponseMessage.Content.ReadAsAsync<T>().Result;
+
+                httpStatusCode = httpResponseMessage.StatusCode;
+            }
+
+            return t;
+        }
+
         public static T Put<T>(Uri uri, dynamic formBody, out HttpStatusCode httpStatusCode)
         {
             T t;

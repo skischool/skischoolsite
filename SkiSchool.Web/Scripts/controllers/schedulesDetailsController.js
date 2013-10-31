@@ -27,6 +27,56 @@ var schedulesDetailsController = ['$scope', 'scheduleService', function ($scope,
               .then(function () {
                   $scope.isLoading = false;
               });
+
+        
+    }
+
+    $scope.showAddSchedule = function (item) {
+
+        $('.datepicker').datepicker({
+            numberOfMonths: 3,
+            showButtonsPanel: true
+        });
+
+        scheduleService.getScheduleTypes()
+                        .then(function () {
+                            // success
+                        },
+                        function () {
+                            // error
+                            alert('could not load');
+                        });
+
+        scheduleService.getScheduleTimes()
+                       .then(function () {
+                           // success
+                       },
+                       function () {
+                           // error
+                           alert('could not load');
+                       });
+
+        $('#addScheduleModal').modal({});
+    }
+
+    $scope.addSchedule = function (item) {
+        $scope.isLoading = false;
+
+        item.Date = $('#newScheduleDate').val();
+
+        scheduleService.postSchedule(item)
+              .then(function () {
+                  // success
+              },
+              function () {
+                  // error
+                  alert('could not save.');
+              })
+              .then(function () {
+                  $scope.isLoading = false;
+
+                  // employeesService.getEmployees();
+              });
     }
 
     $scope.showDetails = function (item) {

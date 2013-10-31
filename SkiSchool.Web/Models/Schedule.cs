@@ -51,6 +51,8 @@ namespace SkiSchool.Web.Models
 
         public ShiftType ShiftType { get; set; }
 
+        public int ScheduleTimeId { get; set; }
+
         public int Count { get; set; }
     }
 }

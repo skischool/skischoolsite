@@ -73,6 +73,38 @@ namespace SkiSchool.Web.App_Start
             }
         }
 
+        public static string ScheduleTypes
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ScheduleTypesUrl"];
+            }
+        }
+
+        public static string ScheduleTimes
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ScheduleTimesUrl"];
+            }
+        }
+
+        public static string ScheduleTime
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ScheduleTimeUrl"];
+            }
+        }
+
+        public static string PostSchedule
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["PostScheduleUrl"];
+            }
+        }
+
         public static string EmployeeTitles
         {
             get

@@ -68,32 +68,32 @@
 
         <div class="input-prepend">
             <span class="add-on">Month</span>
-            <input readonly value="{{ selectedItem.Date | date: 'MMMM' }}" />
+            <input readonly type="text" value="{{ selectedItem.Date | date: 'MMMM' }}" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Date</span>
-            <input readonly value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
+            <input readonly type="text" value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Start</span>
-            <input readonly value="{{ selectedItem.Start | date: 'shortTime' }}" />
+            <input readonly type="text" value="{{ selectedItem.Start | date: 'shortTime' }}" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">End</span>
-            <input readonly value="{{ selectedItem.End | date: 'shortTime' }}" />
+            <input readonly type="text" value="{{ selectedItem.End | date: 'shortTime' }}" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Type</span>
-            <input readonly value="{{ selectedItem.ShiftTypeName }}" />
+            <input readonly type="text" value="{{ selectedItem.ShiftTypeName }}" />
         </div>
         <br />
         <div class="input-prepend">
             <span class="add-on">Total</span>
-            <input readonly value="{{ selectedItem.Count }}" />
+            <input readonly type="text" value="{{ selectedItem.Count }}" />
         </div>
     </div>
     <div class="modal-footer">
@@ -110,32 +110,32 @@
 
                 <div class="input-prepend">
                     <span class="add-on">Month</span>
-                    <input readonly value="{{ selectedItem.Date | date: 'MMMM' }}" />
+                    <input readonly type="text" value="{{ selectedItem.Date | date: 'MMMM' }}" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">Date</span>
-                    <input readonly value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
+                    <input readonly type="text" value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">Start</span>
-                    <input readonly value="{{ selectedItem.Start | date: 'shortTime' }}" />
+                    <input readonly type="text" value="{{ selectedItem.Start | date: 'shortTime' }}" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">End</span>
-                    <input readonly value="{{ selectedItem.End | date: 'shortTime' }}" />
+                    <input readonly type="text" value="{{ selectedItem.End | date: 'shortTime' }}" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">Type</span>
-                    <input readonly value="{{ selectedItem.ShiftTypeName }}" />
+                    <input readonly type="text" value="{{ selectedItem.ShiftTypeName }}" />
                 </div>
                 <br />
                 <div class="input-prepend">
                     <span class="add-on">Total</span>
-                    <input id="count" data-ng-model="selectedItem.Count" />
+                    <input id="count" type="text" data-ng-model="selectedItem.Count" />
                 </div>
     </div>
     <div class="modal-footer">
