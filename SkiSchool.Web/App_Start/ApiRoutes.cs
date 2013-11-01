@@ -89,6 +89,14 @@ namespace SkiSchool.Web.App_Start
             }
         }
 
+        public static string DeleteSchedule
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["DeleteScheduleUrl"];
+            }
+        }
+
         public static string ScheduleTime
         {
             get

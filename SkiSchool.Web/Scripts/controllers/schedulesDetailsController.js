@@ -59,6 +59,24 @@ var schedulesDetailsController = ['$scope', 'scheduleService', function ($scope,
         $('#addScheduleModal').modal({});
     }
 
+    $scope.deleteSchedule = function (item) {
+        $scope.isLoading = false;
+
+        scheduleService.deleteSchedule(item)
+                       .then(function () {
+                           // success
+                       },
+                       function () {
+                           // error
+                           alert('could not delete.');
+                       })
+                       .then(function () {
+                           $scope.isLoading = false
+
+                           scheduleService.getSchedules();
+                       });
+    }
+
     $scope.addSchedule = function (item) {
         $scope.isLoading = false;
 
@@ -75,7 +93,7 @@ var schedulesDetailsController = ['$scope', 'scheduleService', function ($scope,
               .then(function () {
                   $scope.isLoading = false;
 
-                  // employeesService.getEmployees();
+                  scheduleService.getSchedules();
               });
     }
 
@@ -88,23 +106,4 @@ var schedulesDetailsController = ['$scope', 'scheduleService', function ($scope,
         $scope.selectedItem = item;
         $('#deleteSchedule').modal({});
     }
-
-    $scope.deleteSchedule = function (item) {
-        $scope.isLoading = false;
-
-        scheduleService.editSchedule(item)
-              .then(function () {
-                  // success
-              },
-              function () {
-                  // error
-                  alert('could not save.');
-              })
-              .then(function () {
-                  $scope.isLoading = false;
-
-                  scheduleService.getSchedules();
-              });
-    }
-
 }];

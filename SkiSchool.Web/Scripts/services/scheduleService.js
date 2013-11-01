@@ -98,6 +98,22 @@
         return deffered.promise;
     }
 
+    var _deleteSchedule = function (schedule) {
+        var deferred = $q.defer();
+
+        $http.delete('../../api/schedules?id=' + schedule.Id)
+             .then(function (result) {
+                 // success
+                 deferred.resolve();
+             }, function () {
+                 // error
+                 deferred.reject();
+             });
+
+        return deferred.promise;
+    }
+    
+
     return {
         schedules: _schedules,
         aggregateSchedules: _aggregateSchedules,
@@ -107,6 +123,7 @@
         getSchedules: _getSchedules,
         getScheduleTypes: _getScheduleTypes,
         getScheduleTimes: _getScheduleTimes,
+        deleteSchedule: _deleteSchedule,
         postSchedule: _postSchedule,
         isReady: _isReady
     };

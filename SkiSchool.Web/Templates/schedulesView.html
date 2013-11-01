@@ -8,25 +8,35 @@
                 <div class="bar" style="width: 100%;"></div>
             </div>
 
-            <div class="input-prepend" data-ng-show="!isLoading">
-                <span class="add-on">
-                    Order By
-                </span>
-                <select data-ng-model="sortorder" class="input-medium">
-                    <option selected value="Date">Date</option>
-                    <option value="Start">Start</option>
-                    <option value="End">End</option>
-                    <option value="ShiftTypeName">Type</option>
-                    <option value="Count">Count</option>
-                </select>
-            </div>
+            <div class="row" data-ng-show="!isLoading">
+                <div class="span6">
+                     <div class="input-prepend">
+                        <span class="add-on">
+                            Order By
+                        </span>
+                        <select data-ng-model="sortorder" class="input-medium">
+                            <option selected value="Date">Date</option>
+                            <option value="Start">Start</option>
+                            <option value="End">End</option>
+                            <option value="ShiftTypeName">Type</option>
+                            <option value="Count">Count</option>
+                        </select>
+                    </div>
 
-            <div class="input-prepend" data-ng-show="!isLoading">
-                <span class="add-on">
-                    Filter
-                </span>
-                <input type="text" data-ng-model="query" class="input-medium" />
+                    <div class="input-prepend" data-ng-show="!isLoading">
+                        <span class="add-on">
+                            Filter
+                        </span>
+                        <input type="text" data-ng-model="query" class="input-medium" />
+                    </div>
+                </div>
+
+                <div class="span6">
+                    <button class="btn pull-right" data-ng-click="showAddSchedule()">Add Shift</button>
+                </div>
+
             </div>
+           
 
             <table class="table table-striped" data-ng-show="!isLoading">
                 <thead>
@@ -43,7 +53,7 @@
                     <tr>
                         <td>
                             <button class="btn" data-ng-click="showDetails(s)">View</button>
-                            <button class="btn" data-ng-click="editDetails(s)">Edit</button>
+                            <button class="btn" data-ng-click="deleteDetails(s)">Delete</button>
                         </td>
                         <td>{{ s.Date | date: 'MMMM' }}</td>
                         <td>{{ s.Date | date: 'EEEE' }}</td>
@@ -101,45 +111,88 @@
     </div>
 </div>
 
-<div id="editSchedule" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
+<div id="addScheduleModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-        <h3>Edit</h3>
+        <h3>Add Shift(s)</h3>
     </div>
     <div class="modal-body">
 
-                <div class="input-prepend">
-                    <span class="add-on">Month</span>
-                    <input readonly type="text" value="{{ selectedItem.Date | date: 'MMMM' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Date</span>
-                    <input readonly type="text" value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Start</span>
-                    <input readonly type="text" value="{{ selectedItem.Start | date: 'shortTime' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">End</span>
-                    <input readonly type="text" value="{{ selectedItem.End | date: 'shortTime' }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Type</span>
-                    <input readonly type="text" value="{{ selectedItem.ShiftTypeName }}" />
-                </div>
-                <br />
-                <div class="input-prepend">
-                    <span class="add-on">Total</span>
-                    <input id="count" type="text" data-ng-model="selectedItem.Count" />
-                </div>
+        <div class="input-prepend">
+            <span class="add-on">Date</span>
+            <input id="newScheduleDate" class="datepicker" type="date" placeholder="mm/dd/yyyy" data-ng-model="newSchedule.ScheduleDate">
+        </div>
+        <br />
+
+        <div class="input-prepend">
+            <span class="add-on">Times</span>
+            <select id="scheduleTime" 
+                    data-ng-model="newSchedule.ScheduleTimeId" 
+                    data-ng-options="t.Id as t.StartEnd for t in data.scheduleTimes"></select>
+        </div>
+
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Type</span>
+            <select id="scheduleType" 
+                    data-ng-model="newSchedule.ShiftTypeId" 
+                    data-ng-options="t.Id as t.Description for t in data.scheduleTypes"></select>
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Total</span>
+            <select data-ng-model="newSchedule.Count">
+                <option selected value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+                <option value=5>5</option>
+                <option value=6>6</option>
+                <option value=7>7</option>
+            </select>
+        </div>
+
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" disabled data-ng-click="editSchedule(selectedItem)">Save</button>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" data-ng-click="addSchedule(newSchedule)">Add</button>
+    </div>
+</div>
+
+<div id="deleteSchedule" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="dlglabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3>Delete</h3>
+    </div>
+    <div class="modal-body">
+
+         <div class="input-prepend">
+            <span class="add-on">Month</span>
+            <input readonly type="text" value="{{ selectedItem.Date | date: 'MMMM' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Date</span>
+            <input readonly type="text" value="{{ selectedItem.Date | date: 'yyyy-MM-dd' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Start</span>
+            <input readonly type="text" value="{{ selectedItem.Start | date: 'shortTime' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">End</span>
+            <input readonly type="text" value="{{ selectedItem.End | date: 'shortTime' }}" />
+        </div>
+        <br />
+        <div class="input-prepend">
+            <span class="add-on">Type</span>
+            <input readonly type="text" value="{{ selectedItem.ShiftTypeName }}" />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true" data-ng-click="deleteSchedule(selectedItem)">Delete</button>
     </div>
 </div>

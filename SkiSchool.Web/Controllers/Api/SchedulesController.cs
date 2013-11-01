@@ -27,6 +27,8 @@ namespace SkiSchool.Web.Controllers.Api
 
         private string _scheduleTimeUrl = ApiRoutes.ScheduleTime;
 
+        private string _deleteScheduleUrl = ApiRoutes.DeleteSchedule;
+
         // GET api/schedules
         public List<Schedule> GetEmployeeSchedules(int? employeeId)
         {
@@ -87,10 +89,11 @@ namespace SkiSchool.Web.Controllers.Api
             }
             else
             {
-                return allSchedules.Take(50)
+                return allSchedules
                                    .OrderBy(s => s.Date)
                                    .ThenBy(s => s.Start)
                                    .ThenBy(s => s.ShiftTypeId)
+                                   .Take(50)
                                    .Select(s => new Schedule() {
                                        Id = s.Id,
                                        Date = s.Date.AddHours(7),
@@ -138,6 +141,18 @@ namespace SkiSchool.Web.Controllers.Api
             return month != null ? 
                 groupedAvailableSchedulesByType.Where(s => s.Date.Month == month).OrderBy(s => s.Date).ToList() : 
                 groupedAvailableSchedulesByType.OrderBy(s => s.Date).ToList();
+        }
+
+        // DELETE api/schedules?id=
+        public Schedule Delete([FromUri]int id)
+        {
+            HttpStatusCode httpStatusCode;
+
+            var deleteScheduleUri = new Uri(string.Format(_deleteScheduleUrl, id, _clientToken));
+
+            var deletedSchedule = Invoke.Delete<Schedule>(deleteScheduleUri, out httpStatusCode);
+
+            return deletedSchedule;
         }
 
         // POST api/schedules

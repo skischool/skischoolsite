@@ -30,20 +30,58 @@ var schedulesController = ['$scope', 'scheduleService', function($scope, schedul
     }
 
     
-    $scope.showDetails = function (item) {
-        $scope.selectedItem = item;
-        $('#viewSchedule').modal({});
+    $scope.showAddSchedule = function (item) {
+
+        $('.datepicker').datepicker({
+            numberOfMonths: 3,
+            showButtonsPanel: true
+        });
+
+        scheduleService.getScheduleTypes()
+                        .then(function () {
+                            // success
+                        },
+                        function () {
+                            // error
+                            alert('could not load');
+                        });
+
+        scheduleService.getScheduleTimes()
+                       .then(function () {
+                           // success
+                       },
+                       function () {
+                           // error
+                           alert('could not load');
+                       });
+
+        $('#addScheduleModal').modal({});
     }
 
-    $scope.editDetails = function (item) {
-        $scope.selectedItem = item;
-        $('#editSchedule').modal({});
-    }
-
-    $scope.editSchedule = function (item) {
+    $scope.deleteSchedule = function (item) {
         $scope.isLoading = false;
 
-        scheduleService.editSchedule(item)
+        scheduleService.deleteSchedule(item)
+                       .then(function () {
+                           // success
+                       },
+                       function () {
+                           // error
+                           alert('could not delete.');
+                       })
+                       .then(function () {
+                           $scope.isLoading = false
+
+                           scheduleService.getSchedulesAggregate();
+                       });
+    }
+
+    $scope.addSchedule = function (item) {
+        $scope.isLoading = false;
+
+        item.Date = $('#newScheduleDate').val();
+
+        scheduleService.postSchedule(item)
               .then(function () {
                   // success
               },
@@ -54,7 +92,17 @@ var schedulesController = ['$scope', 'scheduleService', function($scope, schedul
               .then(function () {
                   $scope.isLoading = false;
 
-                  scheduleService.getSchedules();
+                  scheduleService.getSchedulesAggregate();
               });
+    }
+
+    $scope.showDetails = function (item) {
+        $scope.selectedItem = item;
+        $('#viewSchedule').modal({});
+    }
+
+    $scope.deleteDetails = function (item) {
+        $scope.selectedItem = item;
+        $('#deleteSchedule').modal({});
     }
 }];

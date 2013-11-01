@@ -34,31 +34,27 @@ namespace SkiSchool.Web.Helpers
             return t;
         }
 
-        //public static T Put<T>(Uri uri, dynamic formBody, out HttpStatusCode httpStatusCode)
-        //{
-        //    T t;
+        public static T Delete<T>(Uri uri, out HttpStatusCode httpStatusCode)
+        {
+            T t;
 
-        //    using (var client = new HttpClient())
-        //    {
-        //        client.BaseAddress = uri;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = uri;
 
-        //        var content = new StringContent(JsonConvert.SerializeObject(formBody), Encoding.UTF8, "application/json");
+                Task<HttpResponseMessage> task = client.DeleteAsync(uri);
 
-        //        // var httpResponseMessage = client.PutAsync(uri, content).Result;
+                task.Wait();
 
-        //        Task<HttpResponseMessage> task = client.PutAsync(uri, content);
+                var httpResponseMessage = task.Result;
 
-        //        task.Wait();
+                t = httpResponseMessage.Content.ReadAsAsync<T>().Result;
 
-        //        var httpResponseMessage = task.Result;
+                httpStatusCode = httpResponseMessage.StatusCode;
+            }
 
-        //        t = httpResponseMessage.Content.ReadAsAsync<T>().Result;
-
-        //        httpStatusCode = httpResponseMessage.StatusCode;
-        //    }
-
-        //    return t;
-        //}
+            return t;
+        }
 
         public static T Post<T>(Uri uri, dynamic formBody, out HttpStatusCode httpStatusCode)
         {
