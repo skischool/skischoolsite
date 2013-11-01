@@ -93,7 +93,6 @@ namespace SkiSchool.Web.Controllers.Api
                                    .OrderBy(s => s.Date)
                                    .ThenBy(s => s.Start)
                                    .ThenBy(s => s.ShiftTypeId)
-                                   .Take(50)
                                    .Select(s => new Schedule() {
                                        Id = s.Id,
                                        Date = s.Date.AddHours(7),
