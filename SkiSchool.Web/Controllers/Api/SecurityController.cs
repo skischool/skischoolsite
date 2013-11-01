@@ -4,9 +4,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Security;
 using SkiSchool.Web.App_Start;
 using SkiSchool.Web.Helpers;
 using SkiSchool.Web.Models;
+using WebMatrix.WebData;
 
 namespace SkiSchool.Web.Controllers.Api
 {
@@ -23,6 +25,28 @@ namespace SkiSchool.Web.Controllers.Api
             _usersContext = new UsersContext();
         }
         
+        // PUT api/security
+        public UserEmployeeInfo Put([FromBody]UserEmployeeInfo userEmployeeInfo, [FromUri]string userName)
+        {
+            HttpStatusCode httpStatusCode;
+
+            var roles = Roles.GetRolesForUser(userName);
+
+            foreach (var role in roles)
+                Roles.RemoveUserFromRole(userName, role);
+
+            Roles.AddUserToRole(userName, userEmployeeInfo.RoleName);
+
+            if (userEmployeeInfo.NewPassword.Length > 0)
+            {
+                var passwordResetToken = WebSecurity.GeneratePasswordResetToken(userName);
+
+                WebSecurity.ResetPassword(passwordResetToken, userEmployeeInfo.NewPassword);
+            }
+
+            return userEmployeeInfo;
+        }
+
         // GET api/security
         public IEnumerable<UserEmployeeInfo> Get()
         {

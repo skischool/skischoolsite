@@ -26,9 +26,26 @@
         return deffered.promise;
     };
 
+    var _editSecurity = function (item) {
+        var deferred = $q.defer();
+
+        $http.put('../../api/security?userName=' + item.Username, item)
+             .then(function (result) {
+                 // success
+                 _isInit = true;
+                 deferred.resolve();
+             }, function () {
+                 // error
+                 deferred.reject();
+             });
+
+        return deferred.promise;
+    }
+
     return {
         security: _security,
         getSecurity: _getSecurity,
+        editSecurity: _editSecurity,
         isReady: _isReady
     };
 });

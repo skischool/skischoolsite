@@ -91,11 +91,20 @@
                 
                 <div class="input-prepend">
                     <span class="add-on">Role</span>
-                    <input id="rolename" type="text" data-ng-model="selectedItem.RoleName" />
+                    <select data-ng-model="selectedItem.RoleName">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <!--<input id="rolename" type="text" data-ng-model="selectedItem.RoleName" />-->
+                </div>
+
+                <div class="input-prepend">
+                    <span class="add-on">New Password</span>
+                    <input id="newPassword" type="text" data-ng-model="selectedItem.NewPassword" />
                 </div>
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button class="btn" data-dismiss="modal" aria-hidden="true" disabled data-ng-click="editSecurity(selectedItem)">Save</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true" data-ng-click="editSecurity(selectedItem)">Save</button>
     </div>
 </div>
